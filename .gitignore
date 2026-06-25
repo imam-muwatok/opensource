@@ -1,0 +1,70 @@
+# ==========================================
+# File Sampah Sistem Operasi
+# ==========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.lnk
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.trash/*
+.trash-*
+.nfs*
+
+# ==========================================
+# Berkas Konfigurasi IDE & Editor
+# ==========================================
+
+# VS Code
+.vscode/
+.vscodeignore
+*.code-workspace
+
+# JetBrains (IntelliJ, PhpStorm, WebStorm, PyCharm, dll.)
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Eclipse
+.metadata
+.project
+.classpath
+.settings/
+*.launch
+
+# ==========================================
+# Berkas Cadangan & Lainnya
+# ==========================================
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+*.temp
+*._*
+*.pyc
+*.pyo

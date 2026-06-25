@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Settings · Muwatok Cash</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-gray-100 antialiased overflow-x-hidden">
+
+  <div id="sidebarBackdrop" class="fixed inset-0 bg-black/50 z-30 hidden transition-opacity duration-300 lg:hidden"></div>
+
+  <div class="flex min-h-screen relative">
+    <!-- ========== SIDEBAR ========== -->
+    <aside id="sidebar" class="fixed lg:sticky top-0 left-0 z-40 w-64 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 shadow-xl lg:shadow-none transform -translate-x-full lg:translate-x-0 sidebar-transition flex flex-col">
+      <div class="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-800">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-wallet text-indigo-600 dark:text-indigo-400 text-2xl"></i>
+          <span class="font-bold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">Muwatok-Cash</span>
+        </div>
+        <button id="closeSidebarBtn" class="lg:hidden text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-xl">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav id="sidebarNav" class="flex-1 py-6 px-3 space-y-1.5"></nav>
+    </aside>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="flex-1 w-full transition-all duration-300">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div class="flex items-center gap-3 mb-8">
+          <button id="openSidebarBtn" class="lg:hidden text-gray-600 dark:text-gray-300 text-2xl focus:outline-none">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="text-2xl md:text-3xl font-bold">Settings</h1>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Import/Export Card -->
+          <div class="bg-white dark:bg-gray-800/80 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 p-6">
+            <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+              <i class="fas fa-database text-indigo-500"></i> Data Management
+            </h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+              Impor data transaksi Anda dari file backup JSON untuk memulihkan riwayat keuangan Anda.
+            </p>
+
+            <div class="space-y-4">
+              <div class="p-4 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-900/50">
+                <label class="block text-sm font-medium mb-2">Pilih File JSON</label>
+                <input type="file" id="importFile" accept=".json" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 dark:file:bg-indigo-900/40 dark:file:text-indigo-300 hover:file:bg-indigo-100 transition">
+              </div>
+              
+              <div class="flex flex-wrap gap-3">
+                <button id="btnImport" class="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-indigo-500/20 transition flex items-center justify-center gap-2">
+                  <i class="fas fa-file-import"></i> Impor Data
+                </button>
+                <button id="btnExport" class="w-full sm:w-auto px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
+                  <i class="fas fa-file-export"></i> Ekspor Data
+                </button>
+                <button id="btnUpdateData" class="w-full sm:w-auto px-6 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-xl shadow-lg shadow-amber-500/20 transition flex items-center justify-center gap-2">
+                  <i class="fas fa-sync-alt"></i> Perbarui Struktur Data
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Budget Settings Card -->
+          <div class="bg-white dark:bg-gray-800/80 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 p-6">
+            <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+              <i class="fas fa-chart-pie text-purple-500"></i> Budget Strategy
+            </h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+              Atur target pengeluaran bulanan Anda. Strategi persentase dihitung otomatis dari total pendapatan bulan ini.
+            </p>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium mb-1.5 text-gray-500 dark:text-gray-400">Pilih Strategi</label>
+                <select id="budgetStrategy" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                  <option value="manual">Persentase Kustom (%)</option>
+                  <option value="autosaving">Berdasarkan Alokasi Tabungan (Auto Saving)</option>
+                  <option value="extreme">Extreme (Batas 30% / Simpan 70%)</option>
+                  <option value="hard">Hard (Batas 50% / Simpan 50%)</option>
+                  <option value="medium">Medium (Batas 70% / Simpan 30%)</option>
+                  <option value="normal">Normal (Batas 80% / Simpan 20%)</option>
+                  <option value="easy">Easy (Batas 90% / Simpan 10%)</option>
+                </select>
+              </div>
+
+              <div id="manualBudgetContent">
+                <label class="block text-sm font-medium mb-1.5 text-gray-500 dark:text-gray-400">Target Bulanan (%)</label>
+                <input type="text" inputmode="numeric" id="monthlyBudgetLimit" placeholder="Contoh: 80" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 outline-none transition">
+              </div>
+
+              <button id="btnSaveBudget" class="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-indigo-500/20 transition flex items-center justify-center gap-2">
+                <i class="fas fa-save"></i> Simpan Target
+              </button>
+            </div>
+          </div>
+
+          <!-- Reset Data Card -->
+          <div class="bg-white dark:bg-gray-800/80 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 p-6">
+            <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+              <i class="fas fa-exclamation-triangle text-rose-500"></i> Danger Zone
+            </h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+              Menghapus semua data transaksi dan kustomisasi tag secara permanen dari browser ini. Pastikan Anda memiliki backup jika diperlukan.
+            </p>
+
+            <button id="btnReset" class="w-full sm:w-auto px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-xl shadow-lg shadow-rose-500/20 transition flex items-center justify-center gap-2">
+              <i class="fas fa-trash-alt"></i> Reset Semua Data
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/settings.js"></script>
+</body>
+</html>
