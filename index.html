@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muwatok Project</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f4f7fc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.08);
+            padding: 2.5rem 2rem;
+            transition: all 0.2s ease;
+        }
+
+        /* ----- HEADER ----- */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            gap: 1rem;
+        }
+
+        .header-left h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0b1a33;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-left h1 span {
+            background: #eef3ff;
+            color: #1a5cff;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 100px;
+            margin-left: 0.5rem;
+        }
+
+        .header-left p {
+            color: #5e6f8d;
+            font-size: 1.05rem;
+            margin-top: 0.25rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .header-actions input {
+            padding: 0.6rem 1.2rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            background: #fafcff;
+            outline: none;
+            width: 220px;
+            transition: border 0.2s;
+            color: #0b1a33;
+        }
+
+        .header-actions input:focus {
+            border-color: #1a5cff;
+            box-shadow: 0 0 0 3px rgba(26, 92, 255, 0.12);
+        }
+
+        .header-actions input::placeholder {
+            color: #a0b3cc;
+        }
+
+        /* ----- STATS BAR ----- */
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+            background: #f8faff;
+            padding: 0.9rem 1.5rem;
+            border-radius: 1.2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #edf2f9;
+        }
+
+        .stats-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+            color: #3d4f6b;
+        }
+
+        .stats-item strong {
+            font-size: 1.2rem;
+            color: #0b1a33;
+        }
+
+        /* ----- GRID APPS (flex, rata tengah) ----- */
+        .apps-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .app-card {
+            flex: 0 0 260px;
+            /* lebar tetap 260px, tidak melebar/ mengecil */
+            background: #ffffff;
+            border: 1.5px solid #edf2f9;
+            border-radius: 1.4rem;
+            padding: 1.5rem 1.2rem 1.2rem;
+            transition: border 0.2s, box-shadow 0.25s, transform 0.15s;
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-card:hover {
+            border-color: #cdddf5;
+            box-shadow: 0 8px 28px rgba(0, 20, 60, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .app-card .icon {
+            font-size: 2.2rem;
+            line-height: 1;
+            margin-bottom: 0.6rem;
+            color: #1a5cff;
+        }
+
+        .app-card .app-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0b1a33;
+            margin-bottom: 0.2rem;
+        }
+
+        .app-card .app-desc {
+            font-size: 0.92rem;
+            color: #5e6f8d;
+            line-height: 1.5;
+            flex: 1;
+            margin: 0.3rem 0 0.8rem;
+        }
+
+        .app-card .app-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.2rem;
+            border-top: 1px solid #f0f4fc;
+            padding-top: 0.75rem;
+        }
+
+        .app-card .app-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            background: #eef3ff;
+            color: #1a5cff;
+            padding: 0.2rem 0.7rem;
+            border-radius: 100px;
+        }
+
+        .app-card .app-link {
+            color: #1a5cff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+            transition: color 0.15s;
+        }
+
+        .app-card .app-link:hover {
+            color: #0e4ad0;
+            text-decoration: underline;
+        }
+
+        /* ----- EMPTY STATE ----- */
+        .empty-state {
+            flex: 1 1 100%;
+            text-align: center;
+            padding: 3.5rem 1rem;
+            color: #5e6f8d;
+        }
+
+        .empty-state .empty-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.8rem;
+            color: #bcc9df;
+        }
+
+        .empty-state h3 {
+            color: #0b1a33;
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .empty-state p {
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        /* ----- PAGINATION ----- */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            background: #f8faff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 100px;
+            padding: 0.4rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #0b1a33;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: #eef3ff;
+            border-color: #1a5cff;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-info {
+            font-size: 0.95rem;
+            color: #5e6f8d;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-left h1 {
+                font-size: 1.6rem;
+            }
+
+            .header-actions input {
+                width: 100%;
+            }
+
+            .stats {
+                gap: 0.8rem 1.5rem;
+                padding: 0.8rem 1rem;
+            }
+
+            .app-card {
+                flex: 0 0 100%;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .header-left h1 span {
+                display: none;
+            }
+
+            .stats-item {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-left">
+                <h1>
+                    <i class="fas fa-th-large" style="color:#1a5cff; margin-right:0.3rem;"></i> Muwatok Project
+                    <span id="count-badge">0</span>
+                </h1>
+                <p>Aplikasi opensource dengan local storage</p>
+            </div>
+            <div class="header-actions">
+                <input type="text" id="searchInput" placeholder="Cari aplikasi..." />
+            </div>
+        </header>
+
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stats-item">
+                <strong id="totalApps">0</strong> total
+            </div>
+            <div class="stats-item">
+                <i class="fas fa-search" style="margin-right:0.2rem;"></i> <span id="visibleApps">0</span> ditampilkan
+            </div>
+        </div>
+
+        <!-- GRID APPS -->
+        <div class="apps-grid" id="appsGrid">
+            <!-- akan di-render oleh JS -->
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="pagination" id="paginationControls">
+            <button id="prevPageBtn" disabled><i class="fas fa-chevron-left"></i> Sebelumnya</button>
+            <span class="page-info" id="pageInfo">Halaman 1 dari 1</span>
+            <button id="nextPageBtn" disabled>Berikutnya <i class="fas fa-chevron-right"></i></button>
+        </div>
+
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- DATA APLIKASI dengan ikon Font Awesome (class lengkap) -----
+            let apps = [{
+                id: '1',
+                name: 'Muwatok Cash',
+                desc: 'Muwatok Cash adalah aplikasi untuk mengetahui data pemasukan dan pengeluaran pribadi. Dilengkapi dengan sistem tabungan',
+                icon: 'fa-solid fa-money-bill',
+                url: '/apps/muwatok-cash/index.html',
+                tag: 'Finance'
+            }, {
+                id: '2',
+                name: 'Crypto Journey',
+                desc: 'Crypto Journey adalah aplikasi untuk pembukuan transaksi crypto anda.',
+                icon: 'fa-brands fa-bitcoin',
+                url: '/apps/crypto-journey/index.html',
+                tag: 'Finance'
+            }];
+
+            // ----- PAGINATION STATE -----
+            const ITEMS_PER_PAGE = 12;
+            let currentPage = 1;
+            let filteredApps = [...apps];
+
+            // ----- DOM REFS -----
+            const grid = document.getElementById('appsGrid');
+            const searchInput = document.getElementById('searchInput');
+            const totalAppsEl = document.getElementById('totalApps');
+            const visibleAppsEl = document.getElementById('visibleApps');
+            const countBadge = document.getElementById('count-badge');
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            const pageInfo = document.getElementById('pageInfo');
+
+            // ----- RENDER -----
+            function render(filter = '') {
+                const query = filter.trim().toLowerCase();
+                filteredApps = apps.filter(a =>
+                    a.name.toLowerCase().includes(query) ||
+                    a.desc.toLowerCase().includes(query) ||
+                    a.tag.toLowerCase().includes(query)
+                );
+
+                currentPage = 1;
+
+                totalAppsEl.textContent = apps.length;
+                visibleAppsEl.textContent = filteredApps.length;
+                countBadge.textContent = apps.length;
+
+                renderPage(currentPage);
+                updatePagination();
+            }
+
+            function renderPage(page) {
+                const totalItems = filteredApps.length;
+                const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+                if (page < 1) page = 1;
+                if (page > totalPages) page = totalPages;
+                currentPage = page;
+
+                const start = (page - 1) * ITEMS_PER_PAGE;
+                const end = Math.min(start + ITEMS_PER_PAGE, totalItems);
+                const pageItems = filteredApps.slice(start, end);
+
+                if (pageItems.length === 0) {
+                    grid.innerHTML = `
+                    <div class="empty-state">
+                      <div class="empty-icon"><i class="fa-regular fa-folder-open"></i></div>
+                      <h3>Tidak ada aplikasi</h3>
+                      <p>${searchInput.value.trim() ? 'Tidak ditemukan dengan kata kunci tersebut.' : 'Belum ada aplikasi yang tersedia.'}</p>
+                    </div>
+                  `;
+                } else {
+                    let html = '';
+                    pageItems.forEach(a => {
+                        // iconClass sekarang berisi class lengkap, misal "fa-solid fa-money-bill"
+                        const iconClass = a.icon || 'fa-solid fa-cube';
+                        html += `
+                        <div class="app-card" data-id="${a.id}">
+                          <div class="icon"><i class="${iconClass}"></i></div>
+                          <div class="app-name">${escapeHtml(a.name)}</div>
+                          <div class="app-desc">${escapeHtml(a.desc) || '—'}</div>
+                          <div class="app-meta">
+                            <span class="app-tag">${escapeHtml(a.tag) || 'Umum'}</span>
+                            <a href="${escapeHtml(a.url)}" target="_blank" rel="noopener" class="app-link">
+                              Buka <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
+                            </a>
+                          </div>
+                        </div>
+                      `;
+                    });
+                    grid.innerHTML = html;
+                }
+
+                updatePagination();
+            }
+
+            function updatePagination() {
+                const totalItems = filteredApps.length;
+                const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+                prevBtn.disabled = currentPage <= 1;
+                nextBtn.disabled = currentPage >= totalPages;
+                pageInfo.textContent = `Halaman ${currentPage} dari ${totalPages}`;
+            }
+
+            function goToPage(page) {
+                const totalItems = filteredApps.length;
+                const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+                if (page < 1) page = 1;
+                if (page > totalPages) page = totalPages;
+                if (page !== currentPage) {
+                    renderPage(page);
+                }
+            }
+
+            prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
+            nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
+
+            searchInput.addEventListener('input', function() {
+                render(this.value);
+            });
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+                return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+            }
+
+            // ----- INIT -----
+            render('');
+
+        })();
+    </script>
+
+</body>
+</html>
