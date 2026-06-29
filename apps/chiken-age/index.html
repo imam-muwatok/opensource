@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🐔 Kalkulator Usia Ayam + Pakan & Telur</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(145deg, #fdf6ec 0%, #f9ede0 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header .icon-big {
+            font-size: 56px;
+            display: block;
+            margin-bottom: 6px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #5a3e2b;
+            letter-spacing: 1px;
+        }
+
+        .header h1 span {
+            color: #d98c5f;
+        }
+
+        .header p {
+            color: #8b6f55;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .storage-badge {
+            display: inline-block;
+            margin-top: 8px;
+            background: #f0e6dc;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b4f38;
+        }
+
+        .storage-badge i {
+            margin-right: 6px;
+            color: #d98c5f;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 28px 30px;
+            box-shadow: 0 12px 40px rgba(90, 62, 43, 0.10);
+            margin-bottom: 28px;
+            border: 1px solid rgba(217, 140, 95, 0.12);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4d3424;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-title i {
+            color: #d98c5f;
+            font-size: 22px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 16px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #6b4f38;
+        }
+
+        .form-group label i {
+            margin-right: 6px;
+            color: #d98c5f;
+            width: 18px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 2px solid #eee4d8;
+            background: #fcf9f6;
+            font-size: 15px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
+            color: #3f2c1d;
+            transition: all 0.25s ease;
+            width: 100%;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #d98c5f;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(217, 140, 95, 0.15);
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #d98c5f, #c5764a);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(217, 140, 95, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(217, 140, 95, 0.40);
+        }
+
+        .btn-danger {
+            background: #f0e0d8;
+            color: #b35e3e;
+        }
+
+        .btn-danger:hover {
+            background: #e8d0c4;
+            transform: scale(1.03);
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 13px;
+            border-radius: 10px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid #f0e6dc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        thead {
+            background: #f5ede6;
+        }
+
+        thead th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 700;
+            color: #4d3424;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        thead th i {
+            margin-right: 6px;
+            color: #d98c5f;
+        }
+
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0e6dc;
+            color: #3f2c1d;
+            font-weight: 500;
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #fcf7f2;
+        }
+
+        .badge-age {
+            display: inline-block;
+            background: #f5ede6;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 12px;
+            color: #5a3e2b;
+        }
+
+        .badge-age i {
+            margin-right: 4px;
+            color: #d98c5f;
+        }
+
+        .badge-type {
+            display: inline-block;
+            background: #e8ddd2;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            color: #5a3e2b;
+        }
+
+        .info-badge {
+            background: #f5ede6;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #5a3e2b;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .info-badge i {
+            color: #d98c5f;
+            margin-right: 4px;
+        }
+
+        .phase-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .phase-starter { background: #4a90d9; }
+        .phase-grower { background: #50b87a; }
+        .phase-layer { background: #d98c5f; }
+        .phase-finisher { background: #b35e3e; }
+        .phase-breeder { background: #7f6b9e; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-state i {
+            font-size: 56px;
+            color: #dccfc4;
+            margin-bottom: 12px;
+        }
+
+        .empty-state h3 {
+            color: #6b4f38;
+            font-weight: 600;
+        }
+
+        .empty-state p {
+            color: #a58d7a;
+            margin-top: 4px;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 6px;
+        }
+
+        .summary-item {
+            background: #fcf8f4;
+            border-radius: 18px;
+            padding: 16px 14px;
+            text-align: center;
+            border: 1px solid #f0e6dc;
+            transition: transform 0.2s ease;
+        }
+
+        .summary-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .summary-item .number {
+            font-size: 26px;
+            font-weight: 800;
+            color: #4d3424;
+            line-height: 1.2;
+        }
+
+        .summary-item .label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #8b6f55;
+            margin-top: 4px;
+        }
+
+        .summary-item .icon {
+            font-size: 18px;
+            color: #d98c5f;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .summary-item.highlight {
+            background: linear-gradient(145deg, #d98c5f, #c5764a);
+            border-color: #c5764a;
+        }
+
+        .summary-item.highlight .number,
+        .summary-item.highlight .label,
+        .summary-item.highlight .icon {
+            color: #fff;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #4d3424;
+            color: #fff;
+            padding: 16px 28px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 999;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            font-size: 22px;
+            color: #f5d4b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .form-grid .btn {
+                grid-column: span 3;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .form-grid .btn {
+                grid-column: span 2;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .card {
+                padding: 20px 18px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-grid .btn {
+                grid-column: span 1;
+            }
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            table {
+                font-size: 11px;
+            }
+            thead th,
+            tbody td {
+                padding: 6px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <span class="icon-big">🐔</span>
+            <h1>Kalkulator <span>Usia Ayam</span></h1>
+            <p>Pakan otomatis berdasarkan usia &amp; prediksi masa bertelur</p>
+            <div class="storage-badge">
+                <i class="fas fa-database"></i> Data tersimpan di lokal perangkat Anda
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-plus-circle"></i> Tambah Koloni Ayam
+            </div>
+            <form id="chickenForm" class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Nama Koloni</label>
+                    <input type="text" id="nameInput" placeholder="Misal: Kandang A" required />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-hashtag"></i> Jumlah (ekor)</label>
+                    <input type="number" id="qtyInput" placeholder="0" min="1" required />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Tanggal Lahir</label>
+                    <input type="date" id="birthDateInput" required />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-hen"></i> Jenis Ayam</label>
+                    <select id="typeSelect" required></select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-feather-alt"></i> Tambah
+                </button>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-table"></i> Daftar Koloni
+                <span style="margin-left:auto;font-size:14px;font-weight:600;color:#8b6f55;" id="colonyCount">0 koloni</span>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Jenis</th>
+                            <th>Jumlah</th>
+                            <th>Usia</th>
+                            <th>Fase</th>
+                            <th>Pakan (gr/ekor/hari)</th>
+                            <th>Total Pakan (gr/hari)</th>
+                            <th>Mulai Bertelur</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+            <div style="margin-top:18px;display:flex;justify-content:flex-end;">
+                <button id="clearAllBtn" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i> Hapus Semua
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-chart-pie"></i> Ringkasan Populasi &amp; Kebutuhan Pakan
+            </div>
+            <div class="summary-grid" id="summaryGrid"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Berhasil!</span>
+    </div>
+
+    <script>
+        // ============================================================
+        //  DATA JENIS AYAM dengan jadwal pakan berdasarkan usia (bulan)
+        // ============================================================
+        const chickenTypes = [{
+            id: 'kampung',
+            name: 'Ayam Kampung',
+            startLaying: 6,
+            feedSchedule: [
+                { maxAge: 1, feed: 30, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 50, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 70, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 100, phase: 'Layer', phaseClass: 'layer' }
+            ]
+        }, {
+            id: 'petelur',
+            name: 'Ayam Petelur',
+            startLaying: 5,
+            feedSchedule: [
+                { maxAge: 1, feed: 35, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 55, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 80, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 120, phase: 'Layer', phaseClass: 'layer' }
+            ]
+        }, {
+            id: 'broiler',
+            name: 'Ayam Broiler',
+            startLaying: null,
+            feedSchedule: [
+                { maxAge: 1, feed: 50, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 90, phase: 'Grower', phaseClass: 'grower' },
+                { maxAge: 3, feed: 130, phase: 'Finisher I', phaseClass: 'finisher' },
+                { maxAge: Infinity, feed: 160, phase: 'Finisher II', phaseClass: 'finisher' }
+            ]
+        }, {
+            id: 'arab',
+            name: 'Ayam Arab',
+            startLaying: 5,
+            feedSchedule: [
+                { maxAge: 1, feed: 30, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 50, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 70, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 110, phase: 'Layer', phaseClass: 'layer' }
+            ]
+        }, {
+            id: 'bangkok',
+            name: 'Ayam Bangkok',
+            startLaying: 6,
+            feedSchedule: [
+                { maxAge: 1, feed: 35, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 60, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 85, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 130, phase: 'Breeder', phaseClass: 'breeder' }
+            ]
+        }, {
+            id: 'kub',
+            name: 'Ayam KUB',
+            startLaying: 5,
+            feedSchedule: [
+                { maxAge: 1, feed: 30, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 50, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 70, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 110, phase: 'Layer', phaseClass: 'layer' }
+            ]
+        }, {
+            id: 'joper',
+            name: 'Ayam Joper',
+            startLaying: 5,
+            feedSchedule: [
+                { maxAge: 1, feed: 45, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 75, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 3, feed: 110, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 140, phase: 'Layer', phaseClass: 'layer' }
+            ]
+        }, {
+            id: 'serama',
+            name: 'Ayam Serama',
+            startLaying: 4,
+            feedSchedule: [
+                { maxAge: 1, feed: 20, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 35, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 50, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 80, phase: 'Breeder', phaseClass: 'breeder' }
+            ]
+        }, {
+            id: 'kalkun',
+            name: 'Kalkun',
+            startLaying: 7,
+            feedSchedule: [
+                { maxAge: 1, feed: 60, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 100, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 160, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: 6, feed: 220, phase: 'Finisher', phaseClass: 'finisher' },
+                { maxAge: Infinity, feed: 260, phase: 'Breeder', phaseClass: 'breeder' }
+            ]
+        }, {
+            id: 'cemani',
+            name: 'Ayam Cemani',
+            startLaying: 6,
+            feedSchedule: [
+                { maxAge: 1, feed: 35, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 55, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 80, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 120, phase: 'Breeder', phaseClass: 'breeder' }
+            ]
+        }, {
+            id: 'ketawa',
+            name: 'Ayam Ketawa',
+            startLaying: 6,
+            feedSchedule: [
+                { maxAge: 1, feed: 30, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 50, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 70, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 100, phase: 'Layer', phaseClass: 'layer' }
+            ]
+        }, {
+            id: 'poland',
+            name: 'Ayam Poland',
+            startLaying: 5,
+            feedSchedule: [
+                { maxAge: 1, feed: 30, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 50, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 70, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 110, phase: 'Layer', phaseClass: 'layer' }
+            ]
+        }, {
+            id: 'brahma',
+            name: 'Ayam Brahma',
+            startLaying: 6,
+            feedSchedule: [
+                { maxAge: 1, feed: 40, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 70, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 110, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 180, phase: 'Breeder', phaseClass: 'breeder' }
+            ]
+        }, {
+            id: 'cochin',
+            name: 'Ayam Cochin',
+            startLaying: 6,
+            feedSchedule: [
+                { maxAge: 1, feed: 40, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 65, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 100, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 160, phase: 'Breeder', phaseClass: 'breeder' }
+            ]
+        }, {
+            id: 'sussex',
+            name: 'Ayam Sussex',
+            startLaying: 5,
+            feedSchedule: [
+                { maxAge: 1, feed: 35, phase: 'Starter', phaseClass: 'starter' },
+                { maxAge: 2, feed: 55, phase: 'Grower I', phaseClass: 'grower' },
+                { maxAge: 4, feed: 80, phase: 'Grower II', phaseClass: 'grower' },
+                { maxAge: Infinity, feed: 130, phase: 'Layer', phaseClass: 'layer' }
+            ]
+        }];
+
+        // ============================================================
+        //  FUNGSI PAKAN BERDASARKAN USIA
+        // ============================================================
+        function getFeedForAge(typeId, ageMonths) {
+            const type = chickenTypes.find(t => t.id === typeId);
+            if (!type) return { feed: 0, phase: '-', phaseClass: 'starter' };
+            const schedule = type.feedSchedule;
+            for (const stage of schedule) {
+                if (ageMonths <= stage.maxAge) {
+                    return { feed: stage.feed, phase: stage.phase, phaseClass: stage.phaseClass };
+                }
+            }
+            const last = schedule[schedule.length - 1];
+            return { feed: last.feed, phase: last.phase, phaseClass: last.phaseClass };
+        }
+
+        // ============================================================
+        //  DATA UTAMA
+        // ============================================================
+        let chickens = [];
+        let nextId = 1;
+        const STORAGE_KEY = 'chickenData';
+
+        const form = document.getElementById('chickenForm');
+        const nameInput = document.getElementById('nameInput');
+        const qtyInput = document.getElementById('qtyInput');
+        const birthDateInput = document.getElementById('birthDateInput');
+        const typeSelect = document.getElementById('typeSelect');
+        const tableBody = document.getElementById('tableBody');
+        const colonyCount = document.getElementById('colonyCount');
+        const summaryGrid = document.getElementById('summaryGrid');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        let toastTimer = null;
+
+        function saveData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ chickens, nextId }));
+        }
+
+        function loadData() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    chickens = parsed.chickens || [];
+                    nextId = parsed.nextId || 1;
+                    return true;
+                } catch (e) { return false; }
+            }
+            return false;
+        }
+
+        function calculateAge(birthDate) {
+            const now = new Date();
+            const birth = new Date(birthDate);
+            birth.setHours(0, 0, 0, 0);
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            let years = today.getFullYear() - birth.getFullYear();
+            let months = today.getMonth() - birth.getMonth();
+            let days = today.getDate() - birth.getDate();
+            if (days < 0) { months--; const prevMonth = new Date(today.getFullYear(), today.getMonth() - 1, birth.getDate());
+                days = Math.floor((today - prevMonth) / (1000 * 60 * 60 * 24)); }
+            if (months < 0) { years--; months += 12; }
+            const totalMonths = years * 12 + months;
+            const totalDays = Math.floor((today - birth) / (1000 * 60 * 60 * 24));
+            const weeks = Math.floor(totalDays / 7);
+            const remainingDays = totalDays % 7;
+            return {
+                years,
+                months,
+                days,
+                totalMonths,
+                weeks,
+                remainingDays,
+                totalDays,
+                display: `${totalMonths} bln (${weeks} mgg${remainingDays > 0 ? ` ${remainingDays} hr` : ''})`
+            };
+        }
+
+        // ============================================================
+        //  RENDER
+        // ============================================================
+        function render() {
+            if (chickens.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="10">
+                            <div class="empty-state">
+                                <i class="fas fa-egg"></i>
+                                <h3>Belum ada data koloni</h3>
+                                <p>Tambahkan koloni ayam pertama Anda!</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                let html = '';
+                chickens.forEach((c, idx) => {
+                    const age = calculateAge(c.birthDate);
+                    const type = chickenTypes.find(t => t.id === c.typeId) || chickenTypes[0];
+                    const feedInfo = getFeedForAge(c.typeId, age.totalMonths);
+                    const feedPerEkor = feedInfo.feed;
+                    const totalFeed = feedPerEkor * c.qty;
+
+                    // Informasi bertelur
+                    let layingInfo = '';
+                    if (type.startLaying !== null) {
+                        const diff = type.startLaying - age.totalMonths;
+                        if (diff > 0) {
+                            layingInfo = `Mulai: ${type.startLaying} bln<br>Usia: ${age.totalMonths} bln<br><strong>${diff} bln lagi</strong>`;
+                        } else if (diff === 0) {
+                            layingInfo = `Mulai: ${type.startLaying} bln<br>Usia: ${age.totalMonths} bln<br><span style="color:#50b87a;">✅ Sudah bertelur</span>`;
+                        } else {
+                            layingInfo = `Mulai: ${type.startLaying} bln<br>Usia: ${age.totalMonths} bln<br><span style="color:#b35e3e;">Lewat ${Math.abs(diff)} bln</span>`;
+                        }
+                    } else {
+                        layingInfo = 'Tidak bertelur';
+                    }
+
+                    html += `
+                        <tr>
+                            <td><strong>${idx + 1}</strong></td>
+                            <td><strong>${escapeHtml(c.name)}</strong></td>
+                            <td><span class="badge-type">${type.name}</span></td>
+                            <td>${c.qty} ekor</td>
+                            <td><span class="badge-age"><i class="fas fa-hourglass-half"></i> ${age.display}</span></td>
+                            <td><span class="phase-badge phase-${feedInfo.phaseClass}">${feedInfo.phase}</span></td>
+                            <td><span class="info-badge"><i class="fas fa-utensils"></i> ${feedPerEkor} gr</span></td>
+                            <td><span class="info-badge"><i class="fas fa-weight"></i> ${totalFeed} gr</span></td>
+                            <td style="font-size:12px; line-height:1.4;">${layingInfo}</td>
+                            <td>
+                                <div class="action-btns">
+                                    <button class="btn btn-danger btn-sm" onclick="deleteChicken(${c.id})">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tableBody.innerHTML = html;
+            }
+
+            colonyCount.textContent = `${chickens.length} koloni`;
+            renderSummary();
+
+            form.reset();
+            typeSelect.value = 'kampung';
+            const todayStr = new Date().toISOString().split('T')[0];
+            birthDateInput.value = todayStr;
+            nameInput.focus();
+        }
+
+        // ============================================================
+        //  SUMMARY
+        // ============================================================
+        function renderSummary() {
+            const totalChickens = chickens.reduce((sum, c) => sum + c.qty, 0);
+            let totalAgeMonths = 0;
+            let allAges = [];
+            chickens.forEach(c => {
+                const age = calculateAge(c.birthDate);
+                const ageMonths = age.totalMonths;
+                totalAgeMonths += ageMonths * c.qty;
+                allAges.push(ageMonths);
+            });
+            const avgAge = totalChickens > 0 ? (totalAgeMonths / totalChickens) : 0;
+            const oldest = allAges.length > 0 ? Math.max(...allAges) : 0;
+            const youngest = allAges.length > 0 ? Math.min(...allAges) : 0;
+            let totalWeeks = 0;
+            chickens.forEach(c => {
+                const age = calculateAge(c.birthDate);
+                totalWeeks += age.weeks * c.qty;
+            });
+            const avgWeeks = totalChickens > 0 ? (totalWeeks / totalChickens) : 0;
+
+            let totalFeed = 0;
+            chickens.forEach(c => {
+                const age = calculateAge(c.birthDate);
+                const feedInfo = getFeedForAge(c.typeId, age.totalMonths);
+                totalFeed += feedInfo.feed * c.qty;
+            });
+
+            summaryGrid.innerHTML = `
+                <div class="summary-item highlight">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <div class="number">${totalChickens}</div>
+                    <div class="label">Total Ayam</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                    <div class="number">${avgAge.toFixed(1)}</div>
+                    <div class="label">Rata-rata Usia (bln)</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-arrow-up"></i></span>
+                    <div class="number">${oldest}</div>
+                    <div class="label">Usia Tertua (bln)</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-arrow-down"></i></span>
+                    <div class="number">${youngest}</div>
+                    <div class="label">Usia Termuda (bln)</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-layer-group"></i></span>
+                    <div class="number">${chickens.length}</div>
+                    <div class="label">Jumlah Koloni</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-clock"></i></span>
+                    <div class="number">${avgWeeks.toFixed(1)}</div>
+                    <div class="label">Rata-rata Usia (mgg)</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-utensils"></i></span>
+                    <div class="number">${totalFeed.toLocaleString()} gr</div>
+                    <div class="label">Total Pakan (gr/hari)</div>
+                </div>
+            `;
+        }
+
+        // ============================================================
+        //  CRUD
+        // ============================================================
+        function addChicken(name, qty, birthDate, typeId) {
+            chickens.push({
+                id: nextId++,
+                name: name.trim(),
+                qty: parseInt(qty, 10),
+                birthDate: birthDate,
+                typeId: typeId,
+            });
+            saveData();
+            render();
+            showToast(`✅ "${name.trim()}" berhasil ditambahkan!`, 'fa-check-circle');
+        }
+
+        function deleteChicken(id) {
+            const index = chickens.findIndex(c => c.id === id);
+            if (index !== -1) {
+                const removed = chickens[index];
+                chickens.splice(index, 1);
+                saveData();
+                render();
+                showToast(`🗑️ "${removed.name}" dihapus`, 'fa-trash-alt');
+            }
+        }
+
+        function clearAll() {
+            if (chickens.length === 0) {
+                showToast('ℹ️ Tidak ada data untuk dihapus', 'fa-info-circle');
+                return;
+            }
+            if (confirm('⚠️ Yakin ingin menghapus SEMUA data koloni?')) {
+                chickens = [];
+                nextId = 1;
+                saveData();
+                render();
+                showToast('🧹 Semua data telah dihapus', 'fa-broom');
+            }
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function showToast(msg, icon = 'fa-check-circle') {
+            toastMessage.textContent = msg;
+            toast.querySelector('i').className = `fas ${icon}`;
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2800);
+        }
+
+        // ============================================================
+        //  INIT SELECT
+        // ============================================================
+        function populateTypeSelect() {
+            typeSelect.innerHTML = '';
+            chickenTypes.forEach(type => {
+                const opt = document.createElement('option');
+                opt.value = type.id;
+                opt.textContent = type.name;
+                typeSelect.appendChild(opt);
+            });
+        }
+
+        // ============================================================
+        //  EVENT LISTENERS
+        // ============================================================
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = nameInput.value.trim();
+            const qty = qtyInput.value.trim();
+            const birthDate = birthDateInput.value;
+            const typeId = typeSelect.value;
+
+            if (!name) { showToast('⚠️ Nama koloni harus diisi!', 'fa-exclamation-triangle');
+                nameInput.focus(); return; }
+            if (!qty || parseInt(qty, 10) < 1) { showToast('⚠️ Jumlah ayam minimal 1 ekor!', 'fa-exclamation-triangle');
+                qtyInput.focus(); return; }
+            if (!birthDate) { showToast('⚠️ Pilih tanggal lahir!', 'fa-exclamation-triangle');
+                birthDateInput.focus(); return; }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const birth = new Date(birthDate);
+            birth.setHours(0, 0, 0, 0);
+            if (birth > today) { showToast('⚠️ Tanggal lahir tidak boleh di masa depan!', 'fa-exclamation-triangle');
+                birthDateInput.focus(); return; }
+
+            addChicken(name, qty, birthDate, typeId);
+        });
+
+        clearAllBtn.addEventListener('click', clearAll);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                form.reset();
+                nameInput.focus();
+                showToast('🧽 Form dibersihkan', 'fa-eraser');
+            }
+        });
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        (function init() {
+            populateTypeSelect();
+            const hasData = loadData();
+
+            if (!hasData || chickens.length === 0) {
+                const today = new Date();
+                const d1 = new Date(today); d1.setMonth(today.getMonth() - 8);
+                const d2 = new Date(today); d2.setMonth(today.getMonth() - 14);
+                const d3 = new Date(today); d3.setMonth(today.getMonth() - 6);
+                const d4 = new Date(today); d4.setMonth(today.getMonth() - 2);
+
+                const sampleData = [
+                    { name: 'Kandang A', qty: 12, birthDate: d1, typeId: 'kub' },
+                    { name: 'Kandang B', qty: 25, birthDate: d2, typeId: 'joper' },
+                    { name: 'Kandang C', qty: 40, birthDate: d3, typeId: 'serama' },
+                    { name: 'Kandang D', qty: 5, birthDate: d1, typeId: 'kalkun' },
+                    { name: 'Kandang E', qty: 8, birthDate: d4, typeId: 'broiler' },
+                    { name: 'Kandang F', qty: 15, birthDate: d2, typeId: 'cemani' },
+                ];
+
+                sampleData.forEach(d => {
+                    const dateStr = d.birthDate.toISOString().split('T')[0];
+                    chickens.push({
+                        id: nextId++,
+                        name: d.name,
+                        qty: d.qty,
+                        birthDate: dateStr,
+                        typeId: d.typeId,
+                    });
+                });
+                saveData();
+                showToast('🐔 Data contoh dimuat dengan pakan & prediksi telur.', 'fa-egg');
+            } else {
+                showToast('📂 Data berhasil dimuat dari penyimpanan lokal.', 'fa-database');
+            }
+
+            const todayStr = new Date().toISOString().split('T')[0];
+            birthDateInput.value = todayStr;
+            typeSelect.value = 'kampung';
+            render();
+        })();
+    </script>
+</body>
+</html>
