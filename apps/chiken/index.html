@@ -397,6 +397,182 @@
             margin-top: 4px;
         }
 
+        /* ===== BEP SECTION ===== */
+        .bep-section {
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 2;
+        }
+        .bep-section .card {
+            padding: 20px 24px 24px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        .bep-section .card::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(46, 204, 113, 0.08), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .bep-section .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bep-section .card-title i {
+            color: var(--green);
+        }
+        .bep-section .card-title .bep-info {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+        .bep-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.1fr 1.1fr;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .bep-card {
+            background: var(--bg-primary);
+            padding: 20px 22px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .bep-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .bep-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 0 4px 4px 0;
+        }
+        .bep-card.bep-chickens::after {
+            background: var(--purple);
+        }
+        .bep-card.bep-v1::after {
+            background: var(--blue);
+        }
+        .bep-card.bep-v2::after {
+            background: var(--accent);
+        }
+        .bep-card.bep-v1 {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05), transparent);
+        }
+        .bep-card.bep-v2 {
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.05), transparent);
+        }
+        .bep-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bep-label i {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        .bep-label .version-tag {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+        .bep-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+        .bep-value .currency {
+            font-size: 16px;
+            font-weight: 600;
+            opacity: 0.7;
+            margin-right: 2px;
+        }
+        .bep-value .per-unit {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-left: 2px;
+        }
+        .bep-value.bep-chickens-value {
+            color: var(--purple);
+        }
+        .bep-value.bep-v1-value {
+            color: var(--blue);
+        }
+        .bep-value.bep-v2-value {
+            color: var(--accent);
+        }
+        .bep-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+        .bep-detail {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .bep-detail .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .bep-detail .detail-row .detail-label {
+            color: var(--text-muted);
+        }
+        .bep-detail .detail-row .detail-value {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .bep-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .bep-empty i {
+            margin-right: 6px;
+        }
+
         /* ===== CHART SECTION ===== */
         .chart-section {
             margin-bottom: 28px;
@@ -423,16 +599,6 @@
         }
         .chart-section .card-title i {
             color: var(--accent);
-        }
-        .chart-section .card-title .colony-badge {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            background: var(--bg-primary);
-            padding: 2px 14px;
-            border-radius: 30px;
-            border: 1px solid var(--border-color);
-            margin-left: 8px;
         }
         .chart-wrapper {
             position: relative;
@@ -517,9 +683,19 @@
             align-items: center;
             gap: 8px;
             color: var(--text-primary);
+            flex-wrap: wrap;
         }
         .colony-chart-card .colony-title i {
             color: var(--accent);
+        }
+        .colony-chart-card .colony-title .chicken-count {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 30px;
+            background: rgba(245, 166, 35, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(245, 166, 35, 0.2);
         }
         .colony-chart-card .chart-wrapper {
             min-height: 160px;
@@ -941,7 +1117,7 @@
 
         /* ===== COLONY & CATEGORY MODAL ===== */
         .list-modal .modal {
-            max-width: 520px;
+            max-width: 540px;
         }
         .list-item {
             display: flex;
@@ -953,6 +1129,7 @@
             border: 1px solid var(--border-color);
             margin-bottom: 8px;
             transition: var(--transition);
+            gap: 8px;
         }
         .list-item:hover {
             border-color: rgba(255, 255, 255, 0.12);
@@ -960,10 +1137,25 @@
         .list-item .item-name {
             font-weight: 500;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+        .list-item .item-name .count-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 30px;
+            background: rgba(245, 166, 35, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(245, 166, 35, 0.25);
         }
         .list-item .item-actions {
             display: flex;
             gap: 6px;
+            flex-shrink: 0;
         }
         .list-item .item-actions button {
             background: transparent;
@@ -998,12 +1190,22 @@
             display: flex;
             gap: 10px;
             margin-top: 6px;
+            flex-wrap: wrap;
         }
         .modal .add-row .form-control {
             flex: 1;
+            min-width: 100px;
+        }
+        .modal .add-row .form-control.count-input {
+            flex: 0 0 100px;
         }
         .modal .add-row .btn {
             flex-shrink: 0;
+        }
+
+        /* ===== EDIT COLONY MODAL ===== */
+        .edit-colony-modal .modal {
+            max-width: 420px;
         }
 
         /* ===== FILE INPUT HIDDEN ===== */
@@ -1092,6 +1294,14 @@
         }
 
         /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .bep-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .bep-card.bep-chickens {
+                grid-column: 1 / -1;
+            }
+        }
         @media (max-width: 768px) {
             .app {
                 padding: 16px;
@@ -1191,6 +1401,18 @@
                 font-size: 13px;
                 padding: 10px;
             }
+            .modal .add-row .form-control.count-input {
+                flex: 1;
+            }
+            .bep-grid {
+                grid-template-columns: 1fr;
+            }
+            .bep-card.bep-chickens {
+                grid-column: auto;
+            }
+            .bep-value {
+                font-size: 24px;
+            }
         }
         @media (max-width: 420px) {
             .stats {
@@ -1278,6 +1500,19 @@
                 <div class="stat-label"><i class="fas fa-coins"></i> Real Pengeluaran</div>
                 <div class="stat-value"><span class="currency">Rp</span><span id="realExpense">0</span></div>
                 <div class="stat-sub">Total - Hutang</div>
+            </div>
+        </section>
+
+        <!-- ===== BEP SECTION ===== -->
+        <section class="bep-section">
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-calculator"></i> Analisis Harga BEP per Ekor
+                    <span class="bep-info"><i class="fas fa-info-circle"></i> Minimal harga jual agar balik modal</span>
+                </div>
+                <div class="bep-grid" id="bepGrid">
+                    <!-- Rendered by JS -->
+                </div>
             </div>
         </section>
 
@@ -1391,11 +1626,35 @@
             <div id="colonyListContainer"></div>
             <div class="add-row" style="margin-top:16px;">
                 <input type="text" class="form-control" id="newColonyInput" placeholder="Nama koloni baru..." />
+                <input type="number" class="form-control count-input" id="newColonyCount" placeholder="Jumlah" min="0" />
                 <button class="btn btn-primary" id="addColonyBtn"><i class="fas fa-plus"></i> Tambah</button>
             </div>
             <div style="margin-top:12px;font-size:12px;color:var(--text-muted);">
                 <i class="fas fa-info-circle"></i> Koloni yang sudah dipakai tidak bisa dihapus.
             </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODAL: EDIT KOLONI -->
+    <!-- ============================================================ -->
+    <div class="modal-overlay edit-colony-modal" id="editColonyModalOverlay">
+        <div class="modal" id="editColonyModal">
+            <div class="modal-header">
+                <h2><i class="fas fa-pen" style="color:var(--blue);"></i> Edit Koloni</h2>
+                <button class="modal-close" id="closeEditColonyModal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-users"></i> Nama Koloni</label>
+                <input type="text" class="form-control" id="editColonyNameInput" placeholder="Nama koloni..." required />
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-dove"></i> Jumlah Ayam (ekor)</label>
+                <input type="number" class="form-control" id="editColonyCountInput" placeholder="0" min="0" />
+            </div>
+            <button class="btn-submit" id="saveEditColonyBtn">
+                <i class="fas fa-save"></i> Simpan Perubahan
+            </button>
         </div>
     </div>
 
@@ -1473,6 +1732,15 @@
 
         const DEFAULT_CATEGORIES = ['Pakan', 'Obat & Vaksin', 'Peralatan', 'Kandang', 'Bibit/DOC', 'Listrik & Air',
             'Transportasi', 'Tenaga Kerja', 'Lainnya'
+        ];
+
+        const DEFAULT_COLONIES = [
+            { name: 'Koloni A', count: 100 },
+            { name: 'Koloni B', count: 80 },
+            { name: 'Kandang 1', count: 50 },
+            { name: 'Kandang 2', count: 40 },
+            { name: 'Petelur', count: 60 },
+            { name: 'Broiler', count: 120 }
         ];
 
         const DEMO_DATA = [{
@@ -1664,6 +1932,7 @@
         const colonyFilter = document.getElementById('colonyFilter');
         const colonyChartsContainer = document.getElementById('colonyChartsContainer');
         const colonyChartsGrid = document.getElementById('colonyChartsGrid');
+        const bepGrid = document.getElementById('bepGrid');
 
         // Modal expense
         const expenseModalOverlay = document.getElementById('expenseModalOverlay');
@@ -1687,7 +1956,16 @@
         const openColonyModalBtn = document.getElementById('openColonyModalBtn');
         const colonyListContainer = document.getElementById('colonyListContainer');
         const newColonyInput = document.getElementById('newColonyInput');
+        const newColonyCount = document.getElementById('newColonyCount');
         const addColonyBtn = document.getElementById('addColonyBtn');
+
+        // Edit colony modal
+        const editColonyModalOverlay = document.getElementById('editColonyModalOverlay');
+        const closeEditColonyModal = document.getElementById('closeEditColonyModal');
+        const editColonyNameInput = document.getElementById('editColonyNameInput');
+        const editColonyCountInput = document.getElementById('editColonyCountInput');
+        const saveEditColonyBtn = document.getElementById('saveEditColonyBtn');
+        let editingColonyOriginalName = null;
 
         // Category modal
         const categoryModalOverlay = document.getElementById('categoryModalOverlay');
@@ -1711,10 +1989,6 @@
         // ============================================================
         function formatCurrency(num) {
             return Number(num).toLocaleString('id-ID');
-        }
-
-        function parseCurrency(str) {
-            return parseInt(str.replace(/\./g, '').replace(/\D/g, ''), 10) || 0;
         }
 
         function getToday() {
@@ -1748,6 +2022,14 @@
             return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
+        function getColonyNameList() {
+            return colonyNames.map(c => c.name);
+        }
+
+        function findColony(name) {
+            return colonyNames.find(c => c.name === name);
+        }
+
         // ============================================================
         //  COLONY LIST
         // ============================================================
@@ -1755,22 +2037,39 @@
             try {
                 const raw = localStorage.getItem(COLONY_LIST_KEY);
                 if (raw) {
-                    colonyNames = JSON.parse(raw);
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed) && parsed.length > 0 && typeof parsed[0] === 'string') {
+                        colonyNames = parsed.map(name => ({ name, count: 0 }));
+                    } else if (Array.isArray(parsed)) {
+                        colonyNames = parsed.map(c => ({
+                            name: c.name || '',
+                            count: Number(c.count) || 0
+                        }));
+                    } else {
+                        colonyNames = JSON.parse(JSON.stringify(DEFAULT_COLONIES));
+                    }
                 } else {
-                    colonyNames = ['Koloni A', 'Koloni B', 'Kandang 1', 'Kandang 2', 'Petelur', 'Broiler'];
+                    colonyNames = JSON.parse(JSON.stringify(DEFAULT_COLONIES));
                     saveColonyList();
                 }
             } catch {
-                colonyNames = [];
+                colonyNames = JSON.parse(JSON.stringify(DEFAULT_COLONIES));
             }
             populateColonyDropdown();
             updateColonyFilter();
         }
 
         function saveColonyList() {
-            const unique = [...new Set(colonyNames)].filter(n => n.trim() !== '');
-            unique.sort((a, b) => a.localeCompare(b, 'id'));
-            colonyNames = unique;
+            const seen = new Set();
+            colonyNames = colonyNames.filter(c => {
+                const n = (c.name || '').trim();
+                if (!n || seen.has(n)) return false;
+                seen.add(n);
+                c.name = n;
+                c.count = Number(c.count) || 0;
+                return true;
+            });
+            colonyNames.sort((a, b) => a.name.localeCompare(b.name, 'id'));
             localStorage.setItem(COLONY_LIST_KEY, JSON.stringify(colonyNames));
             populateColonyDropdown();
             updateColonyFilter();
@@ -1780,13 +2079,16 @@
         function populateColonyDropdown(selectedValue) {
             const select = modalExpenseColony;
             select.innerHTML = '<option value="">Pilih koloni...</option>';
-            colonyNames.forEach(name => {
+            colonyNames.forEach(colony => {
                 const opt = document.createElement('option');
-                opt.value = name;
-                opt.textContent = name;
+                opt.value = colony.name;
+                opt.textContent = colony.count > 0 ?
+                    `${colony.name} (${colony.count} ekor)` :
+                    colony.name;
                 select.appendChild(opt);
             });
-            if (selectedValue && colonyNames.includes(selectedValue)) {
+            const names = getColonyNameList();
+            if (selectedValue && names.includes(selectedValue)) {
                 select.value = selectedValue;
             } else {
                 select.value = '';
@@ -1796,10 +2098,12 @@
         function updateColonyFilter() {
             const currentValue = colonyFilter.value;
             colonyFilter.innerHTML = '<option value="Semua">🏷️ Semua Koloni</option>';
-            colonyNames.forEach(name => {
+            colonyNames.forEach(colony => {
                 const opt = document.createElement('option');
-                opt.value = name;
-                opt.textContent = name;
+                opt.value = colony.name;
+                opt.textContent = colony.count > 0 ?
+                    `${colony.name} (${colony.count} ekor)` :
+                    colony.name;
                 colonyFilter.appendChild(opt);
             });
             if ([...colonyFilter.options].some(o => o.value === currentValue)) {
@@ -1810,11 +2114,11 @@
             }
         }
 
-        function addColonyName(name) {
+        function addColonyName(name, count = 0) {
             const trimmed = name.trim();
             if (!trimmed) return false;
-            if (!colonyNames.includes(trimmed)) {
-                colonyNames.push(trimmed);
+            if (!colonyNames.some(c => c.name === trimmed)) {
+                colonyNames.push({ name: trimmed, count: Number(count) || 0 });
                 saveColonyList();
                 return true;
             }
@@ -1827,32 +2131,34 @@
                 showToast(`❌ Koloni "${name}" sedang digunakan, tidak bisa dihapus`, 'error');
                 return false;
             }
-            colonyNames = colonyNames.filter(c => c !== name);
+            colonyNames = colonyNames.filter(c => c.name !== name);
             saveColonyList();
             renderColonyList();
             showToast(`🗑️ Koloni "${name}" dihapus`, 'info');
             return true;
         }
 
-        function editColonyName(oldName, newName) {
+        function editColonyName(oldName, newName, newCount) {
             const trimmed = newName.trim();
             if (!trimmed) return false;
-            if (oldName === trimmed) return true;
-            if (colonyNames.includes(trimmed)) {
+            if (oldName !== trimmed && colonyNames.some(c => c.name === trimmed)) {
                 showToast(`❌ Nama "${trimmed}" sudah ada`, 'error');
                 return false;
             }
             expenses.forEach(e => {
                 if (e.colony === oldName) e.colony = trimmed;
             });
-            const idx = colonyNames.indexOf(oldName);
-            if (idx !== -1) {
-                colonyNames[idx] = trimmed;
+            const colony = colonyNames.find(c => c.name === oldName);
+            if (colony) {
+                colony.name = trimmed;
+                if (newCount !== undefined && newCount !== null) {
+                    colony.count = Number(newCount) || 0;
+                }
                 saveColonyList();
                 saveData();
                 renderAll();
                 renderColonyList();
-                showToast(`✏️ Koloni "${oldName}" diubah menjadi "${trimmed}"`, 'success');
+                showToast(`✏️ Koloni "${oldName}" diperbarui`, 'success');
                 return true;
             }
             return false;
@@ -2045,7 +2351,7 @@
         }
 
         // ============================================================
-        //  RENDER
+        //  RENDER STATS
         // ============================================================
         function renderStats() {
             const total = expenses.reduce((sum, e) => sum + e.amount, 0);
@@ -2061,6 +2367,110 @@
             realExpenseEl.textContent = formatCurrency(realExpense);
             todayExpenseEl.textContent = formatCurrency(todayTotal);
             todayDateEl.textContent = getTodayLabel();
+        }
+
+        // ============================================================
+        //  RENDER BEP
+        // ============================================================
+        function renderBEP() {
+            const totalAyam = colonyNames.reduce((sum, c) => sum + (Number(c.count) || 0), 0);
+
+            // Version 1: DOC + Pakan only
+            const docTotal = expenses
+                .filter(e => e.category === 'Bibit/DOC')
+                .reduce((sum, e) => sum + e.amount, 0);
+            const pakanTotal = expenses
+                .filter(e => e.category === 'Pakan')
+                .reduce((sum, e) => sum + e.amount, 0);
+            const version1Total = docTotal + pakanTotal;
+            const bep1 = totalAyam > 0 ? version1Total / totalAyam : 0;
+
+            // Version 2: All expenses
+            const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
+            const bep2 = totalAyam > 0 ? totalExpense / totalAyam : 0;
+
+            // Total chickens card
+            const chickensCard = `
+                <div class="bep-card bep-chickens">
+                    <div class="bep-label"><i class="fas fa-dove"></i> Total Ayam</div>
+                    <div class="bep-value bep-chickens-value">
+                        ${totalAyam.toLocaleString('id-ID')}
+                        <span class="per-unit">ekor</span>
+                    </div>
+                    <div class="bep-sub">Dari ${colonyNames.length} koloni terdaftar</div>
+                </div>
+            `;
+
+            // Version 1 card
+            const v1Card = `
+                <div class="bep-card bep-v1">
+                    <div class="bep-label">
+                        <i class="fas fa-egg"></i> Versi 1
+                        <span class="version-tag">DOC + Pakan</span>
+                    </div>
+                    <div class="bep-value bep-v1-value">
+                        <span class="currency">Rp</span>${Math.round(bep1).toLocaleString('id-ID')}
+                        <span class="per-unit">/ekor</span>
+                    </div>
+                    <div class="bep-sub">Minimal harga jual untuk BEP (DOC + Pakan)</div>
+                    <div class="bep-detail">
+                        <div class="detail-row">
+                            <span class="detail-label">🐣 Bibit/DOC</span>
+                            <span class="detail-value">Rp ${formatCurrency(docTotal)}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">🌾 Pakan</span>
+                            <span class="detail-value">Rp ${formatCurrency(pakanTotal)}</span>
+                        </div>
+                        <div class="detail-row" style="border-top:1px solid var(--border-color);padding-top:4px;margin-top:2px;">
+                            <span class="detail-label"><b>Total</b></span>
+                            <span class="detail-value"><b>Rp ${formatCurrency(version1Total)}</b></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Version 2 card
+            const v2Card = `
+                <div class="bep-card bep-v2">
+                    <div class="bep-label">
+                        <i class="fas fa-coins"></i> Versi 2
+                        <span class="version-tag">Semua Pengeluaran</span>
+                    </div>
+                    <div class="bep-value bep-v2-value">
+                        <span class="currency">Rp</span>${Math.round(bep2).toLocaleString('id-ID')}
+                        <span class="per-unit">/ekor</span>
+                    </div>
+                    <div class="bep-sub">Minimal harga jual untuk BEP (semua pengeluaran)</div>
+                    <div class="bep-detail">
+                        <div class="detail-row">
+                            <span class="detail-label">Total semua pengeluaran</span>
+                            <span class="detail-value">Rp ${formatCurrency(totalExpense)}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Total ayam</span>
+                            <span class="detail-value">${totalAyam.toLocaleString('id-ID')} ekor</span>
+                        </div>
+                        <div class="detail-row" style="border-top:1px solid var(--border-color);padding-top:4px;margin-top:2px;">
+                            <span class="detail-label"><b>BEP per ekor</b></span>
+                            <span class="detail-value"><b>Rp ${Math.round(bep2).toLocaleString('id-ID')}</b></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // If no chickens data, show empty state
+            if (totalAyam === 0) {
+                bepGrid.innerHTML = `
+                    <div class="bep-empty">
+                        <i class="fas fa-info-circle"></i>
+                        Belum ada data jumlah ayam. Tambahkan jumlah ayam di <b>Kelola Koloni</b> untuk melihat analisis BEP.
+                    </div>
+                `;
+                return;
+            }
+
+            bepGrid.innerHTML = chickensCard + v1Card + v2Card;
         }
 
         function renderList() {
@@ -2221,7 +2631,6 @@
                 }
             });
 
-            // Legend
             if (legendEl) {
                 let legendHtml = '';
                 slices.forEach((slice) => {
@@ -2254,14 +2663,12 @@
         //  RENDER PIE CHARTS
         // ============================================================
         function renderPieCharts() {
-            // Main chart (all colonies)
             const mainMap = {};
             expenses.forEach(e => {
                 mainMap[e.category] = (mainMap[e.category] || 0) + e.amount;
             });
             drawPieChart(chartCanvas, chartLegend, mainMap, 'Total');
 
-            // Colony charts
             const colonySet = new Set();
             expenses.forEach(e => {
                 if (e.colony) colonySet.add(e.colony);
@@ -2271,20 +2678,25 @@
             if (colonies.length > 1) {
                 colonyChartsContainer.style.display = 'block';
                 colonyChartsGrid.innerHTML = '';
-                colonies.forEach(colony => {
+                colonies.forEach(colonyName => {
                     const colonyData = {};
-                    expenses.filter(e => e.colony === colony).forEach(e => {
+                    expenses.filter(e => e.colony === colonyName).forEach(e => {
                         colonyData[e.category] = (colonyData[e.category] || 0) + e.amount;
                     });
                     const totalColony = Object.values(colonyData).reduce((a, b) => a + b, 0);
                     if (totalColony === 0) return;
+
+                    const colonyObj = findColony(colonyName);
+                    const countBadge = colonyObj && colonyObj.count > 0 ?
+                        `<span class="chicken-count">🐔 ${colonyObj.count} ekor</span>` :
+                        '';
 
                     const card = document.createElement('div');
                     card.className = 'colony-chart-card';
 
                     const title = document.createElement('div');
                     title.className = 'colony-title';
-                    title.innerHTML = `<i class="fas fa-users"></i> ${colony} <span style="font-size:13px;font-weight:400;color:var(--text-muted);">${formatCurrency(totalColony)}</span>`;
+                    title.innerHTML = `<i class="fas fa-users"></i> ${colonyName} ${countBadge} <span style="font-size:13px;font-weight:400;color:var(--text-muted);">${formatCurrency(totalColony)}</span>`;
                     card.appendChild(title);
 
                     const wrapper = document.createElement('div');
@@ -2304,7 +2716,7 @@
                     card.appendChild(wrapper);
                     colonyChartsGrid.appendChild(card);
 
-                    drawPieChart(canvas, legend, colonyData, colony);
+                    drawPieChart(canvas, legend, colonyData, colonyName);
                 });
             } else {
                 colonyChartsContainer.style.display = 'none';
@@ -2316,6 +2728,7 @@
         // ============================================================
         function renderAll() {
             renderStats();
+            renderBEP();
             renderList();
             renderPieCharts();
             demoToggle.checked = demoMode;
@@ -2339,14 +2752,21 @@
                 return;
             }
             let html = '';
-            colonyNames.forEach(name => {
-                const used = expenses.some(e => e.colony === name);
+            colonyNames.forEach(colony => {
+                const used = expenses.some(e => e.colony === colony.name);
+                const countBadge = colony.count > 0 ?
+                    `<span class="count-badge">🐔 ${colony.count} ekor</span>` :
+                    '';
                 html += `
                     <div class="list-item">
-                        <span class="item-name">${name} ${used ? '<span style="color:var(--text-muted);font-size:11px;">(digunakan)</span>' : ''}</span>
+                        <span class="item-name">
+                            ${colony.name}
+                            ${countBadge}
+                            ${used ? '<span style="color:var(--text-muted);font-size:11px;">(digunakan)</span>' : ''}
+                        </span>
                         <div class="item-actions">
-                            <button class="edit-item-btn" data-name="${name}" title="Edit nama"><i class="fas fa-pen"></i></button>
-                            ${!used ? `<button class="delete-item-btn" data-name="${name}" title="Hapus"><i class="fas fa-trash"></i></button>` : ''}
+                            <button class="edit-item-btn" data-name="${colony.name}" title="Edit"><i class="fas fa-pen"></i></button>
+                            ${!used ? `<button class="delete-item-btn" data-name="${colony.name}" title="Hapus"><i class="fas fa-trash"></i></button>` : ''}
                         </div>
                     </div>
                 `;
@@ -2356,12 +2776,13 @@
             document.querySelectorAll('#colonyListContainer .edit-item-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const oldName = this.dataset.name;
-                    const newName = prompt('Ubah nama koloni:', oldName);
-                    if (newName !== null && newName.trim() !== '' && newName.trim() !== oldName) {
-                        editColonyName(oldName, newName.trim());
-                    } else if (newName !== null && newName.trim() === '') {
-                        showToast('Nama tidak boleh kosong', 'error');
-                    }
+                    const colony = findColony(oldName);
+                    if (!colony) return;
+                    editingColonyOriginalName = oldName;
+                    editColonyNameInput.value = colony.name;
+                    editColonyCountInput.value = colony.count || 0;
+                    editColonyModalOverlay.classList.add('active');
+                    editColonyNameInput.focus();
                 });
             });
 
@@ -2504,13 +2925,10 @@
             if (!confirm('⚠️ Yakin ingin menghapus semua data?\n\nData yang dihapus tidak dapat dikembalikan!')) return;
             expenses = [];
             saveData();
-            // Reset colony list to default
-            colonyNames = ['Koloni A', 'Koloni B', 'Kandang 1', 'Kandang 2', 'Petelur', 'Broiler'];
+            colonyNames = JSON.parse(JSON.stringify(DEFAULT_COLONIES));
             saveColonyList();
-            // Reset category list to default
             categoryNames = [...DEFAULT_CATEGORIES];
             saveCategoryList();
-            // Switch to real mode if in demo
             if (demoMode) {
                 setDemoMode(false);
             }
@@ -2527,7 +2945,7 @@
                 expenses: expenses,
                 colonyNames: colonyNames,
                 categoryNames: categoryNames,
-                version: '1.0',
+                version: '1.2',
                 exportedAt: new Date().toISOString()
             };
             const json = JSON.stringify(data, null, 2);
@@ -2561,7 +2979,14 @@
                     }
                     expenses = data.expenses || [];
                     if (data.colonyNames && Array.isArray(data.colonyNames)) {
-                        colonyNames = data.colonyNames;
+                        if (data.colonyNames.length > 0 && typeof data.colonyNames[0] === 'string') {
+                            colonyNames = data.colonyNames.map(name => ({ name, count: 0 }));
+                        } else {
+                            colonyNames = data.colonyNames.map(c => ({
+                                name: c.name || '',
+                                count: Number(c.count) || 0
+                            }));
+                        }
                         saveColonyList();
                     }
                     if (data.categoryNames && Array.isArray(data.categoryNames)) {
@@ -2569,7 +2994,6 @@
                         saveCategoryList();
                     }
                     saveData();
-                    // Switch to real mode
                     if (demoMode) {
                         setDemoMode(false);
                     }
@@ -2616,11 +3040,21 @@
             renderColonyList();
             colonyModalOverlay.classList.add('active');
             newColonyInput.value = '';
+            newColonyCount.value = '';
             newColonyInput.focus();
         }
 
         function closeColonyModalFn() {
             colonyModalOverlay.classList.remove('active');
+        }
+
+        function openEditColonyModalFn() {
+            editColonyModalOverlay.classList.add('active');
+        }
+
+        function closeEditColonyModalFn() {
+            editColonyModalOverlay.classList.remove('active');
+            editingColonyOriginalName = null;
         }
 
         function openCategoryModalFn() {
@@ -2696,7 +3130,6 @@
             }
         });
 
-        // Close modal on overlay click
         expenseModalOverlay.addEventListener('click', (e) => {
             if (e.target === expenseModalOverlay) closeExpenseModalFn();
         });
@@ -2706,6 +3139,11 @@
             if (e.target === colonyModalOverlay) closeColonyModalFn();
         });
         closeColonyModal.addEventListener('click', closeColonyModalFn);
+
+        editColonyModalOverlay.addEventListener('click', (e) => {
+            if (e.target === editColonyModalOverlay) closeEditColonyModalFn();
+        });
+        closeEditColonyModal.addEventListener('click', closeEditColonyModalFn);
 
         categoryModalOverlay.addEventListener('click', (e) => {
             if (e.target === categoryModalOverlay) closeCategoryModalFn();
@@ -2721,6 +3159,7 @@
             if (e.key === 'Escape') {
                 if (expenseModalOverlay.classList.contains('active')) closeExpenseModalFn();
                 if (colonyModalOverlay.classList.contains('active')) closeColonyModalFn();
+                if (editColonyModalOverlay.classList.contains('active')) closeEditColonyModalFn();
                 if (categoryModalOverlay.classList.contains('active')) closeCategoryModalFn();
                 if (settingsModalOverlay.classList.contains('active')) closeSettingsModalFn();
             }
@@ -2730,15 +3169,11 @@
         //  SETTINGS BUTTONS
         // ============================================================
         settingsBtn.addEventListener('click', openSettingsModalFn);
-
         resetDataBtn.addEventListener('click', resetAllData);
-
         exportDataBtn.addEventListener('click', exportData);
-
         importDataBtn.addEventListener('click', () => {
             fileInput.click();
         });
-
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
                 importData(e.target.files[0]);
@@ -2751,19 +3186,48 @@
         // ============================================================
         addColonyBtn.addEventListener('click', () => {
             const name = newColonyInput.value.trim();
+            const count = parseInt(newColonyCount.value) || 0;
             if (!name) { showToast('Masukkan nama koloni', 'error'); return; }
-            if (addColonyName(name)) {
+            if (addColonyName(name, count)) {
                 showToast(`✅ Koloni "${name}" ditambahkan`, 'success');
                 newColonyInput.value = '';
+                newColonyCount.value = '';
                 renderColonyList();
                 populateColonyDropdown();
                 updateColonyFilter();
+                renderBEP();
             } else {
                 showToast(`❌ Koloni "${name}" sudah ada`, 'error');
             }
         });
         newColonyInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') addColonyBtn.click();
+        });
+        newColonyCount.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') addColonyBtn.click();
+        });
+
+        // ============================================================
+        //  SAVE EDIT COLONY
+        // ============================================================
+        saveEditColonyBtn.addEventListener('click', () => {
+            if (!editingColonyOriginalName) return;
+            const newName = editColonyNameInput.value.trim();
+            const newCount = parseInt(editColonyCountInput.value) || 0;
+            if (!newName) {
+                showToast('Nama koloni tidak boleh kosong', 'error');
+                editColonyNameInput.focus();
+                return;
+            }
+            if (editColonyName(editingColonyOriginalName, newName, newCount)) {
+                closeEditColonyModalFn();
+            }
+        });
+        editColonyNameInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') saveEditColonyBtn.click();
+        });
+        editColonyCountInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') saveEditColonyBtn.click();
         });
 
         // ============================================================
@@ -2844,7 +3308,7 @@
         console.log('🐔 AyamExpense Pro siap!');
         console.log(`📌 Mode: ${demoMode ? 'DEMO' : 'REAL'}`);
         console.log(`📊 ${expenses.length} data dimuat.`);
-        console.log(`🏷️ ${colonyNames.length} nama koloni tersimpan.`);
+        console.log(`🏷️ ${colonyNames.length} koloni tersimpan.`);
         console.log(`🏷️ ${categoryNames.length} kategori tersimpan.`);
     </script>
 
