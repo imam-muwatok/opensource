@@ -132,10 +132,6 @@
             gap: 6px;
         }
 
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
         .form-group label {
             font-weight: 600;
             font-size: 14px;
@@ -168,18 +164,6 @@
             border-color: #d98c5f;
             background: #ffffff;
             box-shadow: 0 0 0 4px rgba(217, 140, 95, 0.15);
-        }
-
-        .form-group .field-hint {
-            font-size: 12px;
-            font-weight: 500;
-            color: #a58d7a;
-            margin-top: 2px;
-        }
-
-        .form-group .field-hint i {
-            color: #d98c5f;
-            margin-right: 4px;
         }
 
         /* ============ BUTTONS ============ */
@@ -245,19 +229,12 @@
             border-radius: 12px;
         }
 
-        /* ============ PRICE INPUTS ============ */
-        .price-inputs {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-left: auto;
-            flex-wrap: wrap;
-        }
-
+        /* ============ FEED PRICE INPUT ============ */
         .feed-price-wrapper {
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-left: auto;
             flex-wrap: wrap;
         }
 
@@ -618,7 +595,7 @@
         }
 
         .summary-item .number {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             color: #4d3424;
             line-height: 1.2;
@@ -671,17 +648,6 @@
             color: #fff;
         }
 
-        .summary-item.breakeven {
-            background: linear-gradient(145deg, #d98c5f, #b35e3e);
-            border-color: #b35e3e;
-        }
-
-        .summary-item.breakeven .number,
-        .summary-item.breakeven .label,
-        .summary-item.breakeven .icon {
-            color: #fff;
-        }
-
         /* ============ TOAST ============ */
         .toast {
             position: fixed;
@@ -716,7 +682,7 @@
 
         /* ============ RESPONSIVE ============ */
         @media (max-width: 992px) {
-            .price-inputs {
+            .feed-price-wrapper {
                 margin-left: 0;
                 width: 100%;
             }
@@ -771,19 +737,15 @@
                 font-size: 14px;
                 padding: 14px 20px;
             }
-            .price-inputs {
-                flex-direction: column;
-                align-items: stretch;
-            }
             .feed-price-wrapper {
-                width: 100%;
+                flex-wrap: wrap;
             }
             .feed-price-wrapper input {
                 width: 100%;
                 flex: 1 1 80px;
             }
             .summary-item .number {
-                font-size: 16px;
+                font-size: 18px;
             }
         }
     </style>
@@ -849,17 +811,10 @@
         <div class="card">
             <div class="card-title">
                 <i class="fas fa-calculator"></i> Kalkulasi Pakan Detail &amp; Proyeksi
-                <div class="price-inputs">
-                    <div class="feed-price-wrapper">
-                        <label for="feedPriceInput"><i class="fas fa-tag"></i> Harga pakan / kg</label>
-                        <input type="number" id="feedPriceInput" value="8000" min="0" step="500" />
-                        <span>Rp</span>
-                    </div>
-                    <div class="feed-price-wrapper">
-                        <label for="defaultDocPriceInput"><i class="fas fa-egg"></i> Default DOC / ekor</label>
-                        <input type="number" id="defaultDocPriceInput" value="8000" min="0" step="500" />
-                        <span>Rp</span>
-                    </div>
+                <div class="feed-price-wrapper">
+                    <label for="feedPriceInput"><i class="fas fa-tag"></i> Harga pakan / kg</label>
+                    <input type="number" id="feedPriceInput" value="8000" min="0" step="500" />
+                    <span>Rp</span>
                 </div>
             </div>
 
@@ -881,9 +836,6 @@
                             <th>Biaya/bulan</th>
                             <th>Total Pakan Terkonsumsi</th>
                             <th>Biaya Terkonsumsi</th>
-                            <th>Harga DOC/ekor</th>
-                            <th>Total DOC</th>
-                            <th>Balik Modal/Ekor</th>
                         </tr>
                     </thead>
                     <tbody id="feedDetailBody"></tbody>
@@ -892,7 +844,7 @@
 
             <div class="feed-note">
                 <i class="fas fa-info-circle"></i>
-                Harga DOC dapat diisi per koloni (bisa berbeda tiap koloni). Default DOC dipakai sebagai nilai awal saat menambah koloni baru. Balik modal / ekor = (total biaya DOC + biaya pakan terkonsumsi) ÷ jumlah ekor.
+                Estimasi pakan = pakan/ekor/hari × jumlah ekor × periode. Total pakan terkonsumsi dihitung dari lahir hingga usia saat ini berdasarkan fase pakan. Harga pakan dapat disesuaikan.
             </div>
 
             <!-- Referensi Jadwal Pakan -->
@@ -950,13 +902,6 @@
                     <div class="form-group">
                         <label for="typeSelect"><i class="fas fa-dove"></i> Jenis Ayam</label>
                         <select id="typeSelect" required></select>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="docPriceInput"><i class="fas fa-egg"></i> Harga Beli DOC / ekor</label>
-                        <input type="number" id="docPriceInput" placeholder="8000" min="0" step="500" />
-                        <div class="field-hint">
-                            <i class="fas fa-info-circle"></i> Harga beli DOC per ekor untuk koloni ini (boleh berbeda tiap koloni).
-                        </div>
                     </div>
                 </div>
 
@@ -1150,6 +1095,9 @@
             return { feed: last.feed, phase: last.phase, phaseClass: last.phaseClass };
         }
 
+        // ============================================================
+        //  FUNGSI PAKAN PER BULAN (untuk kalkulasi kumulatif)
+        // ============================================================
         function getFeedForMonth(typeId, monthIndex) {
             const type = chickenTypes.find(t => t.id === typeId);
             if (!type) return 0;
@@ -1161,20 +1109,27 @@
             return type.feedSchedule[type.feedSchedule.length - 1].feed;
         }
 
+        // ============================================================
+        //  FUNGSI TOTAL PAKAN TERKONSUMSI (dari lahir hingga sekarang)
+        // ============================================================
         function getCumulativeFeed(typeId, birthDate, qty) {
             const age = calculateAge(birthDate);
             const fullMonths = age.totalMonths;
             const remainingDays = Math.max(0, age.totalDays - fullMonths * 30);
 
             let totalFeedPerBird = 0;
+
+            // Bulan-bulan penuh
             for (let m = 0; m < fullMonths; m++) {
                 const feed = getFeedForMonth(typeId, m);
                 totalFeedPerBird += feed * 30;
             }
+
+            // Sisa hari di bulan berjalan
             const currentFeed = getFeedForMonth(typeId, fullMonths);
             totalFeedPerBird += currentFeed * remainingDays;
 
-            return totalFeedPerBird * qty;
+            return totalFeedPerBird * qty; // gram
         }
 
         // ============================================================
@@ -1200,11 +1155,6 @@
             return isNaN(val) || val < 0 ? 0 : val;
         }
 
-        function getDefaultDocPrice() {
-            const val = parseFloat(document.getElementById('defaultDocPriceInput').value);
-            return isNaN(val) || val < 0 ? 0 : val;
-        }
-
         // ============================================================
         //  DATA UTAMA
         // ============================================================
@@ -1213,14 +1163,12 @@
         let editingId = null;
         const STORAGE_KEY = 'chickenData';
         const PRICE_KEY = 'feedPrice';
-        const DEFAULT_DOC_PRICE_KEY = 'defaultDocPrice';
 
         const form = document.getElementById('chickenForm');
         const nameInput = document.getElementById('nameInput');
         const qtyInput = document.getElementById('qtyInput');
         const birthDateInput = document.getElementById('birthDateInput');
         const typeSelect = document.getElementById('typeSelect');
-        const docPriceInput = document.getElementById('docPriceInput');
         const tableBody = document.getElementById('tableBody');
         const colonyCount = document.getElementById('colonyCount');
         const summaryGrid = document.getElementById('summaryGrid');
@@ -1244,7 +1192,6 @@
         const feedProjectionGrid = document.getElementById('feedProjectionGrid');
         const feedDetailBody = document.getElementById('feedDetailBody');
         const feedPriceInput = document.getElementById('feedPriceInput');
-        const defaultDocPriceInput = document.getElementById('defaultDocPriceInput');
         const toggleScheduleBtn = document.getElementById('toggleScheduleBtn');
         const scheduleReference = document.getElementById('scheduleReference');
         const scheduleReferenceBody = document.getElementById('scheduleReferenceBody');
@@ -1260,12 +1207,7 @@
             if (stored) {
                 try {
                     const parsed = JSON.parse(stored);
-                    chickens = (parsed.chickens || []).map(c => ({
-                        ...c,
-                        docPrice: (c.docPrice !== undefined && c.docPrice !== null && !isNaN(c.docPrice))
-                            ? c.docPrice
-                            : getDefaultDocPrice()
-                    }));
+                    chickens = parsed.chickens || [];
                     nextId = parsed.nextId || 1;
                     return true;
                 } catch (e) { return false; }
@@ -1282,17 +1224,6 @@
 
         function saveFeedPrice() {
             localStorage.setItem(PRICE_KEY, feedPriceInput.value);
-        }
-
-        function loadDefaultDocPrice() {
-            const stored = localStorage.getItem(DEFAULT_DOC_PRICE_KEY);
-            if (stored !== null) {
-                defaultDocPriceInput.value = stored;
-            }
-        }
-
-        function saveDefaultDocPrice() {
-            localStorage.setItem(DEFAULT_DOC_PRICE_KEY, defaultDocPriceInput.value);
         }
 
         function calculateAge(birthDate) {
@@ -1332,7 +1263,7 @@
         function setModalMode(mode) {
             if (mode === 'edit') {
                 modalTitle.textContent = 'Edit Koloni Ayam';
-                modalSubtitle.textContent = 'Perbarui data koloni termasuk harga beli DOC';
+                modalSubtitle.textContent = 'Perbarui data koloni yang sudah ada';
                 modalIcon.classList.add('edit-mode');
                 modalIconInner.className = 'fas fa-pen';
                 submitBtn.classList.remove('btn-primary');
@@ -1357,7 +1288,6 @@
             form.reset();
             typeSelect.value = 'kampung';
             birthDateInput.value = todayString();
-            docPriceInput.value = getDefaultDocPrice() || 8000;
 
             modalOverlay.classList.add('show');
             modalOverlay.setAttribute('aria-hidden', 'false');
@@ -1377,9 +1307,6 @@
             qtyInput.value = colony.qty;
             birthDateInput.value = colony.birthDate;
             typeSelect.value = colony.typeId;
-            docPriceInput.value = colony.docPrice !== undefined && colony.docPrice !== null
-                ? colony.docPrice
-                : getDefaultDocPrice();
 
             modalOverlay.classList.add('show');
             modalOverlay.setAttribute('aria-hidden', 'false');
@@ -1549,7 +1476,7 @@
             if (chickens.length === 0) {
                 feedDetailBody.innerHTML = `
                     <tr>
-                        <td colspan="15">
+                        <td colspan="12">
                             <div class="empty-state" style="padding: 24px 12px;">
                                 <i class="fas fa-egg" style="font-size:36px;"></i>
                                 <p style="margin-top:6px;">Belum ada data koloni</p>
@@ -1571,8 +1498,6 @@
             let totalPerDay = 0;
             let totalCumulativeFeed = 0;
             let totalCumulativeCost = 0;
-            let totalBirds = 0;
-            let totalDocCost = 0;
 
             chickens.forEach((c, idx) => {
                 const age = calculateAge(c.birthDate);
@@ -1587,18 +1512,9 @@
                 const cumulativeFeed = getCumulativeFeed(c.typeId, c.birthDate, c.qty);
                 const cumulativeCost = (cumulativeFeed / 1000) * price;
 
-                const colonyDocPrice = (c.docPrice !== undefined && c.docPrice !== null && !isNaN(c.docPrice))
-                    ? c.docPrice
-                    : getDefaultDocPrice();
-                const colonyDocCost = colonyDocPrice * c.qty;
-                const colonyInvestment = colonyDocCost + cumulativeCost;
-                const colonyBreakEven = c.qty > 0 ? colonyInvestment / c.qty : 0;
-
                 totalPerDay += perDay;
                 totalCumulativeFeed += cumulativeFeed;
                 totalCumulativeCost += cumulativeCost;
-                totalBirds += c.qty;
-                totalDocCost += colonyDocCost;
 
                 html += `
                     <tr>
@@ -1614,9 +1530,6 @@
                         <td style="color:#3e9d63; font-weight:700;">${formatRupiah(costPerMonth)}</td>
                         <td style="color:#6a5886; font-weight:700;">${formatWeight(cumulativeFeed)}</td>
                         <td style="color:#6a5886; font-weight:700;">${formatRupiah(cumulativeCost)}</td>
-                        <td style="color:#c5764a; font-weight:700;">${formatRupiah(colonyDocPrice)}</td>
-                        <td style="color:#c5764a; font-weight:700;">${formatRupiah(colonyDocCost)}</td>
-                        <td style="color:#b35e3e; font-weight:800;">${formatRupiah(colonyBreakEven)}</td>
                     </tr>
                 `;
             });
@@ -1628,9 +1541,6 @@
             const perYearTotal = totalPerDay * 365;
             const costPerMonthTotal = (perMonthTotal / 1000) * price;
             const costPerYearTotal = (perYearTotal / 1000) * price;
-
-            const totalInvestment = totalDocCost + totalCumulativeCost;
-            const breakEvenPerBird = totalBirds > 0 ? totalInvestment / totalBirds : 0;
 
             feedProjectionGrid.innerHTML = `
                 <div class="summary-item highlight">
@@ -1672,21 +1582,6 @@
                     <span class="icon"><i class="fas fa-wallet"></i></span>
                     <div class="number">${formatRupiah(totalCumulativeCost)}</div>
                     <div class="label">Biaya Pakan Terkonsumsi</div>
-                </div>
-                <div class="summary-item consumed">
-                    <span class="icon"><i class="fas fa-egg"></i></span>
-                    <div class="number">${formatRupiah(totalDocCost)}</div>
-                    <div class="label">Total Biaya DOC</div>
-                </div>
-                <div class="summary-item breakeven">
-                    <span class="icon"><i class="fas fa-chart-line"></i></span>
-                    <div class="number">${formatRupiah(totalInvestment)}</div>
-                    <div class="label">Total Investasi</div>
-                </div>
-                <div class="summary-item breakeven">
-                    <span class="icon"><i class="fas fa-balance-scale"></i></span>
-                    <div class="number">${formatRupiah(breakEvenPerBird)}</div>
-                    <div class="label">Rata-rata Balik Modal / Ekor</div>
                 </div>
             `;
         }
@@ -1744,21 +1639,20 @@
         // ============================================================
         //  CRUD
         // ============================================================
-        function addChicken(name, qty, birthDate, typeId, docPrice) {
+        function addChicken(name, qty, birthDate, typeId) {
             chickens.push({
                 id: nextId++,
                 name: name.trim(),
                 qty: parseInt(qty, 10),
                 birthDate: birthDate,
                 typeId: typeId,
-                docPrice: docPrice
             });
             saveData();
             render();
             showToast(`✅ "${name.trim()}" berhasil ditambahkan!`, 'fa-check-circle');
         }
 
-        function updateChicken(id, name, qty, birthDate, typeId, docPrice) {
+        function updateChicken(id, name, qty, birthDate, typeId) {
             const index = chickens.findIndex(c => c.id === id);
             if (index === -1) return false;
 
@@ -1768,7 +1662,6 @@
                 qty: parseInt(qty, 10),
                 birthDate: birthDate,
                 typeId: typeId,
-                docPrice: docPrice
             };
             saveData();
             render();
@@ -1847,8 +1740,6 @@
             const qty = qtyInput.value.trim();
             const birthDate = birthDateInput.value;
             const typeId = typeSelect.value;
-            const docPriceRaw = docPriceInput.value.trim();
-            const docPrice = docPriceRaw === '' ? getDefaultDocPrice() : parseFloat(docPriceRaw);
 
             if (!name) { showToast('⚠️ Nama koloni harus diisi!', 'fa-exclamation-triangle');
                 nameInput.focus(); return; }
@@ -1856,8 +1747,6 @@
                 qtyInput.focus(); return; }
             if (!birthDate) { showToast('⚠️ Pilih tanggal lahir!', 'fa-exclamation-triangle');
                 birthDateInput.focus(); return; }
-            if (isNaN(docPrice) || docPrice < 0) { showToast('⚠️ Harga DOC tidak boleh negatif!', 'fa-exclamation-triangle');
-                docPriceInput.focus(); return; }
 
             const today = new Date();
             today.setHours(0, 0, 0, 0);
@@ -1867,9 +1756,9 @@
                 birthDateInput.focus(); return; }
 
             if (editingId !== null) {
-                updateChicken(editingId, name, qty, birthDate, typeId, docPrice);
+                updateChicken(editingId, name, qty, birthDate, typeId);
             } else {
-                addChicken(name, qty, birthDate, typeId, docPrice);
+                addChicken(name, qty, birthDate, typeId);
             }
             closeModal();
         });
@@ -1887,10 +1776,6 @@
             renderFeedDetail();
         });
 
-        defaultDocPriceInput.addEventListener('input', () => {
-            saveDefaultDocPrice();
-        });
-
         toggleScheduleBtn.addEventListener('click', () => {
             const isHidden = scheduleReference.style.display === 'none';
             scheduleReference.style.display = isHidden ? 'block' : 'none';
@@ -1906,7 +1791,6 @@
         (function init() {
             populateTypeSelect();
             loadFeedPrice();
-            loadDefaultDocPrice();
             const hasData = loadData();
 
             if (!hasData || chickens.length === 0) {
@@ -1915,15 +1799,14 @@
                 const d2 = new Date(today); d2.setMonth(today.getMonth() - 14);
                 const d3 = new Date(today); d3.setMonth(today.getMonth() - 6);
                 const d4 = new Date(today); d4.setMonth(today.getMonth() - 2);
-                const defaultDoc = getDefaultDocPrice() || 8000;
 
                 const sampleData = [
-                    { name: 'Kandang A', qty: 12, birthDate: d1, typeId: 'kub', docPrice: defaultDoc },
-                    { name: 'Kandang B', qty: 25, birthDate: d2, typeId: 'joper', docPrice: defaultDoc },
-                    { name: 'Kandang C', qty: 40, birthDate: d3, typeId: 'serama', docPrice: defaultDoc },
-                    { name: 'Kandang D', qty: 5, birthDate: d1, typeId: 'kalkun', docPrice: 25000 },
-                    { name: 'Kandang E', qty: 8, birthDate: d4, typeId: 'broiler', docPrice: defaultDoc },
-                    { name: 'Kandang F', qty: 15, birthDate: d2, typeId: 'cemani', docPrice: 15000 },
+                    { name: 'Kandang A', qty: 12, birthDate: d1, typeId: 'kub' },
+                    { name: 'Kandang B', qty: 25, birthDate: d2, typeId: 'joper' },
+                    { name: 'Kandang C', qty: 40, birthDate: d3, typeId: 'serama' },
+                    { name: 'Kandang D', qty: 5, birthDate: d1, typeId: 'kalkun' },
+                    { name: 'Kandang E', qty: 8, birthDate: d4, typeId: 'broiler' },
+                    { name: 'Kandang F', qty: 15, birthDate: d2, typeId: 'cemani' },
                 ];
 
                 sampleData.forEach(d => {
@@ -1934,7 +1817,6 @@
                         qty: d.qty,
                         birthDate: dateStr,
                         typeId: d.typeId,
-                        docPrice: d.docPrice
                     });
                 });
                 saveData();
