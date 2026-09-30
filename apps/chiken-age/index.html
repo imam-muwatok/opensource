@@ -101,6 +101,7 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .card-title i {
@@ -108,11 +109,21 @@
             font-size: 22px;
         }
 
+        .count-badge {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b4f38;
+            background: #f5ede6;
+            padding: 4px 14px;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+
+        /* ============ FORM ============ */
         .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            grid-template-columns: 1fr 1fr;
             gap: 16px;
-            align-items: end;
         }
 
         .form-group {
@@ -155,6 +166,7 @@
             box-shadow: 0 0 0 4px rgba(217, 140, 95, 0.15);
         }
 
+        /* ============ BUTTONS ============ */
         .btn {
             padding: 12px 28px;
             border: none;
@@ -182,6 +194,15 @@
             box-shadow: 0 10px 28px rgba(217, 140, 95, 0.40);
         }
 
+        .btn-ghost {
+            background: #f5ede6;
+            color: #6b4f38;
+        }
+
+        .btn-ghost:hover {
+            background: #ece0d5;
+        }
+
         .btn-danger {
             background: #f0e0d8;
             color: #b35e3e;
@@ -192,12 +213,202 @@
             transform: scale(1.03);
         }
 
-        .btn-sm {
-            padding: 6px 14px;
-            font-size: 13px;
-            border-radius: 10px;
+        .btn-edit {
+            background: #e3eefb;
+            color: #3b6ea5;
         }
 
+        .btn-edit:hover {
+            background: #d0e2f5;
+            transform: scale(1.03);
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 13px;
+            border-radius: 12px;
+        }
+
+        /* ============ FEED PRICE INPUT ============ */
+        .feed-price-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+            flex-wrap: wrap;
+        }
+
+        .feed-price-wrapper label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b4f38;
+            white-space: nowrap;
+        }
+
+        .feed-price-wrapper label i {
+            color: #d98c5f;
+            margin-right: 4px;
+            font-size: 14px;
+        }
+
+        .feed-price-wrapper input {
+            width: 120px;
+            padding: 7px 12px;
+            border-radius: 10px;
+            border: 2px solid #eee4d8;
+            background: #fcf9f6;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            color: #3f2c1d;
+            outline: none;
+            font-size: 13px;
+            transition: all 0.25s ease;
+            text-align: right;
+        }
+
+        .feed-price-wrapper input:focus {
+            border-color: #d98c5f;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(217, 140, 95, 0.12);
+        }
+
+        .feed-price-wrapper span {
+            font-size: 13px;
+            font-weight: 700;
+            color: #6b4f38;
+        }
+
+        /* ============ MODAL ============ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(77, 52, 36, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 900;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: #ffffff;
+            border-radius: 26px;
+            padding: 28px 30px 26px;
+            width: 100%;
+            max-width: 640px;
+            box-shadow: 0 28px 70px rgba(90, 62, 43, 0.30);
+            border: 1px solid rgba(217, 140, 95, 0.14);
+            transform: translateY(24px) scale(0.96);
+            transition: transform 0.32s cubic-bezier(0.34, 1.4, 0.64, 1);
+            max-height: 92vh;
+            overflow-y: auto;
+            margin: auto;
+        }
+
+        .modal-overlay.show .modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .modal-header .modal-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #d98c5f, #c5764a);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 6px 18px rgba(217, 140, 95, 0.35);
+            flex-shrink: 0;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modal-header .modal-icon.edit-mode {
+            background: linear-gradient(145deg, #3b6ea5, #2e5a8a);
+            box-shadow: 0 6px 18px rgba(59, 110, 165, 0.35);
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4d3424;
+            line-height: 1.2;
+        }
+
+        .modal-header p {
+            font-size: 13px;
+            font-weight: 500;
+            color: #a58d7a;
+            margin-top: 2px;
+        }
+
+        .modal-close {
+            margin-left: auto;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            background: #f5ede6;
+            color: #8b6f55;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            background: #e8d0c4;
+            color: #b35e3e;
+            transform: rotate(90deg);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #f0e6dc;
+        }
+
+        .modal-actions .btn {
+            min-width: 120px;
+        }
+
+        .btn-save {
+            background: linear-gradient(145deg, #3b6ea5, #2e5a8a);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(59, 110, 165, 0.35);
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(59, 110, 165, 0.40);
+        }
+
+        /* ============ TABLE ============ */
         .table-wrapper {
             overflow-x: auto;
             border-radius: 16px;
@@ -222,6 +433,7 @@
             font-size: 12px;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         thead th i {
@@ -253,6 +465,7 @@
             font-weight: 600;
             font-size: 12px;
             color: #5a3e2b;
+            white-space: nowrap;
         }
 
         .badge-age i {
@@ -268,6 +481,7 @@
             font-weight: 600;
             font-size: 12px;
             color: #5a3e2b;
+            white-space: nowrap;
         }
 
         .info-badge {
@@ -292,6 +506,7 @@
             font-size: 11px;
             font-weight: 700;
             color: #fff;
+            white-space: nowrap;
         }
 
         .phase-starter { background: #4a90d9; }
@@ -327,6 +542,38 @@
             flex-wrap: wrap;
         }
 
+        .card-footer {
+            margin-top: 18px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .feed-note {
+            margin-top: 14px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #a58d7a;
+            text-align: center;
+            padding: 8px 12px;
+            background: #fcf8f4;
+            border-radius: 12px;
+            border: 1px dashed #f0e6dc;
+        }
+
+        .feed-note i {
+            color: #d98c5f;
+            margin-right: 4px;
+        }
+
+        .schedule-toggle {
+            margin-top: 16px;
+        }
+
+        .schedule-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        /* ============ SUMMARY ============ */
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -348,7 +595,7 @@
         }
 
         .summary-item .number {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 800;
             color: #4d3424;
             line-height: 1.2;
@@ -379,6 +626,18 @@
             color: #fff;
         }
 
+        .summary-item.cost {
+            background: linear-gradient(145deg, #50b87a, #3e9d63);
+            border-color: #3e9d63;
+        }
+
+        .summary-item.cost .number,
+        .summary-item.cost .label,
+        .summary-item.cost .icon {
+            color: #fff;
+        }
+
+        /* ============ TOAST ============ */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -397,6 +656,7 @@
             opacity: 0;
             transition: all 0.4s ease;
             z-index: 999;
+            max-width: calc(100vw - 40px);
         }
 
         .toast.show {
@@ -409,37 +669,36 @@
             color: #f5d4b8;
         }
 
-        /* Responsive */
+        /* ============ RESPONSIVE ============ */
         @media (max-width: 992px) {
-            .form-grid {
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-            .form-grid .btn {
-                grid-column: span 3;
+            .feed-price-wrapper {
+                margin-left: 0;
+                width: 100%;
             }
         }
 
         @media (max-width: 720px) {
-            .form-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .form-grid .btn {
-                grid-column: span 2;
-            }
             .header h1 {
                 font-size: 28px;
             }
             .card {
                 padding: 20px 18px;
             }
+            .modal {
+                padding: 22px 20px;
+            }
+            .count-badge {
+                order: 3;
+                margin-left: 0;
+            }
         }
 
         @media (max-width: 520px) {
+            body {
+                padding: 20px 12px;
+            }
             .form-grid {
                 grid-template-columns: 1fr;
-            }
-            .form-grid .btn {
-                grid-column: span 1;
             }
             .summary-grid {
                 grid-template-columns: 1fr 1fr;
@@ -453,6 +712,29 @@
             thead th,
             tbody td {
                 padding: 6px 8px;
+            }
+            .modal-actions {
+                flex-direction: column-reverse;
+            }
+            .modal-actions .btn {
+                width: 100%;
+            }
+            .toast {
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                font-size: 14px;
+                padding: 14px 20px;
+            }
+            .feed-price-wrapper {
+                flex-wrap: wrap;
+            }
+            .feed-price-wrapper input {
+                width: 100%;
+                flex: 1 1 80px;
+            }
+            .summary-item .number {
+                font-size: 18px;
             }
         }
     </style>
@@ -469,38 +751,16 @@
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-title">
-                <i class="fas fa-plus-circle"></i> Tambah Koloni Ayam
-            </div>
-            <form id="chickenForm" class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-tag"></i> Nama Koloni</label>
-                    <input type="text" id="nameInput" placeholder="Misal: Kandang A" required />
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-hashtag"></i> Jumlah (ekor)</label>
-                    <input type="number" id="qtyInput" placeholder="0" min="1" required />
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Tanggal Lahir</label>
-                    <input type="date" id="birthDateInput" required />
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-hen"></i> Jenis Ayam</label>
-                    <select id="typeSelect" required></select>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-feather-alt"></i> Tambah
-                </button>
-            </form>
-        </div>
-
+        <!-- ============ DAFTAR KOLONI ============ -->
         <div class="card">
             <div class="card-title">
                 <i class="fas fa-table"></i> Daftar Koloni
-                <span style="margin-left:auto;font-size:14px;font-weight:600;color:#8b6f55;" id="colonyCount">0 koloni</span>
+                <span class="count-badge" id="colonyCount">0 koloni</span>
+                <button type="button" class="btn btn-primary btn-sm" id="openModalBtn">
+                    <i class="fas fa-plus"></i> Tambah Koloni
+                </button>
             </div>
+
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -520,18 +780,127 @@
                     <tbody id="tableBody"></tbody>
                 </table>
             </div>
-            <div style="margin-top:18px;display:flex;justify-content:flex-end;">
+
+            <div class="card-footer">
                 <button id="clearAllBtn" class="btn btn-danger btn-sm">
                     <i class="fas fa-trash-alt"></i> Hapus Semua
                 </button>
             </div>
         </div>
 
+        <!-- ============ RINGKASAN ============ -->
         <div class="card">
             <div class="card-title">
                 <i class="fas fa-chart-pie"></i> Ringkasan Populasi &amp; Kebutuhan Pakan
             </div>
             <div class="summary-grid" id="summaryGrid"></div>
+        </div>
+
+        <!-- ============ KALKULASI PAKAN DETAIL ============ -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-calculator"></i> Kalkulasi Pakan Detail &amp; Proyeksi
+                <div class="feed-price-wrapper">
+                    <label for="feedPriceInput"><i class="fas fa-tag"></i> Harga pakan / kg</label>
+                    <input type="number" id="feedPriceInput" value="8000" min="0" step="500" />
+                    <span>Rp</span>
+                </div>
+            </div>
+
+            <div class="summary-grid" id="feedProjectionGrid"></div>
+
+            <div class="table-wrapper" style="margin-top: 20px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Koloni</th>
+                            <th>Jenis</th>
+                            <th>Usia</th>
+                            <th>Fase</th>
+                            <th>Pakan/ekor/hari</th>
+                            <th>Total/hari</th>
+                            <th>Total/minggu</th>
+                            <th>Total/bulan</th>
+                            <th>Biaya/bulan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feedDetailBody"></tbody>
+                </table>
+            </div>
+
+            <div class="feed-note">
+                <i class="fas fa-info-circle"></i>
+                Estimasi pakan = pakan/ekor/hari × jumlah ekor × periode. Harga pakan dapat disesuaikan.
+            </div>
+
+            <!-- Referensi Jadwal Pakan -->
+            <div>
+                <button type="button" class="btn btn-ghost btn-sm schedule-toggle" id="toggleScheduleBtn">
+                    <i class="fas fa-chevron-down"></i> <span>Lihat Jadwal Pakan Referensi</span>
+                </button>
+                <div id="scheduleReference" style="display: none; margin-top: 16px;">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Jenis Ayam</th>
+                                    <th>Fase &amp; Usia</th>
+                                    <th>Pakan (gr/ekor/hari)</th>
+                                    <th>Mulai Bertelur</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleReferenceBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MODAL TAMBAH / EDIT KOLONI ============ -->
+    <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon"><i class="fas fa-feather-alt" id="modalIconInner"></i></div>
+                <div>
+                    <h2 id="modalTitle">Tambah Koloni Ayam</h2>
+                    <p id="modalSubtitle">Isi data koloni untuk menghitung pakan &amp; prediksi telur</p>
+                </div>
+                <button type="button" class="modal-close" id="closeModalBtn" aria-label="Tutup">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="chickenForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nameInput"><i class="fas fa-tag"></i> Nama Koloni</label>
+                        <input type="text" id="nameInput" placeholder="Misal: Kandang A" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="qtyInput"><i class="fas fa-hashtag"></i> Jumlah (ekor)</label>
+                        <input type="number" id="qtyInput" placeholder="0" min="1" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDateInput"><i class="fas fa-calendar-alt"></i> Tanggal Lahir</label>
+                        <input type="date" id="birthDateInput" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="typeSelect"><i class="fas fa-dove"></i> Jenis Ayam</label>
+                        <select id="typeSelect" required></select>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="cancelBtn">
+                        <i class="fas fa-times"></i> Batal
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-plus" id="submitIcon"></i> <span id="submitText">Tambah Koloni</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -714,11 +1083,36 @@
         }
 
         // ============================================================
+        //  FORMAT HELPERS
+        // ============================================================
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('id-ID');
+        }
+
+        function formatWeight(grams) {
+            if (grams >= 1000) {
+                return (grams / 1000).toFixed(1).replace('.', ',') + ' kg';
+            }
+            return formatNumber(grams) + ' gr';
+        }
+
+        function formatRupiah(amount) {
+            return 'Rp ' + Math.round(amount).toLocaleString('id-ID');
+        }
+
+        function getFeedPrice() {
+            const val = parseFloat(document.getElementById('feedPriceInput').value);
+            return isNaN(val) || val < 0 ? 0 : val;
+        }
+
+        // ============================================================
         //  DATA UTAMA
         // ============================================================
         let chickens = [];
         let nextId = 1;
+        let editingId = null;
         const STORAGE_KEY = 'chickenData';
+        const PRICE_KEY = 'feedPrice';
 
         const form = document.getElementById('chickenForm');
         const nameInput = document.getElementById('nameInput');
@@ -731,6 +1125,27 @@
         const clearAllBtn = document.getElementById('clearAllBtn');
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toastMessage');
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSubtitle = document.getElementById('modalSubtitle');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalIconInner = document.getElementById('modalIconInner');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitIcon = document.getElementById('submitIcon');
+        const submitText = document.getElementById('submitText');
+
+        const feedProjectionGrid = document.getElementById('feedProjectionGrid');
+        const feedDetailBody = document.getElementById('feedDetailBody');
+        const feedPriceInput = document.getElementById('feedPriceInput');
+        const toggleScheduleBtn = document.getElementById('toggleScheduleBtn');
+        const scheduleReference = document.getElementById('scheduleReference');
+        const scheduleReferenceBody = document.getElementById('scheduleReferenceBody');
+
         let toastTimer = null;
 
         function saveData() {
@@ -748,6 +1163,17 @@
                 } catch (e) { return false; }
             }
             return false;
+        }
+
+        function loadFeedPrice() {
+            const stored = localStorage.getItem(PRICE_KEY);
+            if (stored !== null) {
+                feedPriceInput.value = stored;
+            }
+        }
+
+        function saveFeedPrice() {
+            localStorage.setItem(PRICE_KEY, feedPriceInput.value);
         }
 
         function calculateAge(birthDate) {
@@ -777,8 +1203,82 @@
             };
         }
 
+        function todayString() {
+            return new Date().toISOString().split('T')[0];
+        }
+
         // ============================================================
-        //  RENDER
+        //  MODAL — TAMBAH / EDIT
+        // ============================================================
+        function setModalMode(mode) {
+            if (mode === 'edit') {
+                modalTitle.textContent = 'Edit Koloni Ayam';
+                modalSubtitle.textContent = 'Perbarui data koloni yang sudah ada';
+                modalIcon.classList.add('edit-mode');
+                modalIconInner.className = 'fas fa-pen';
+                submitBtn.classList.remove('btn-primary');
+                submitBtn.classList.add('btn-save');
+                submitIcon.className = 'fas fa-save';
+                submitText.textContent = 'Simpan Perubahan';
+            } else {
+                modalTitle.textContent = 'Tambah Koloni Ayam';
+                modalSubtitle.textContent = 'Isi data koloni untuk menghitung pakan & prediksi telur';
+                modalIcon.classList.remove('edit-mode');
+                modalIconInner.className = 'fas fa-feather-alt';
+                submitBtn.classList.remove('btn-save');
+                submitBtn.classList.add('btn-primary');
+                submitIcon.className = 'fas fa-plus';
+                submitText.textContent = 'Tambah Koloni';
+            }
+        }
+
+        function openAddModal() {
+            editingId = null;
+            setModalMode('add');
+            form.reset();
+            typeSelect.value = 'kampung';
+            birthDateInput.value = todayString();
+
+            modalOverlay.classList.add('show');
+            modalOverlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => nameInput.focus(), 120);
+        }
+
+        function openEditModal(id) {
+            const colony = chickens.find(c => c.id === id);
+            if (!colony) return;
+
+            editingId = id;
+            setModalMode('edit');
+
+            nameInput.value = colony.name;
+            qtyInput.value = colony.qty;
+            birthDateInput.value = colony.birthDate;
+            typeSelect.value = colony.typeId;
+
+            modalOverlay.classList.add('show');
+            modalOverlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                nameInput.focus();
+                nameInput.select();
+            }, 120);
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('show');
+            modalOverlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            editingId = null;
+
+            setTimeout(() => setModalMode('add'), 300);
+        }
+
+        // ============================================================
+        //  RENDER — DAFTAR KOLONI
         // ============================================================
         function render() {
             if (chickens.length === 0) {
@@ -788,7 +1288,7 @@
                             <div class="empty-state">
                                 <i class="fas fa-egg"></i>
                                 <h3>Belum ada data koloni</h3>
-                                <p>Tambahkan koloni ayam pertama Anda!</p>
+                                <p>Klik tombol "Tambah Koloni" untuk memulai!</p>
                             </div>
                         </td>
                     </tr>
@@ -802,7 +1302,6 @@
                     const feedPerEkor = feedInfo.feed;
                     const totalFeed = feedPerEkor * c.qty;
 
-                    // Informasi bertelur
                     let layingInfo = '';
                     if (type.startLaying !== null) {
                         const diff = type.startLaying - age.totalMonths;
@@ -830,7 +1329,10 @@
                             <td style="font-size:12px; line-height:1.4;">${layingInfo}</td>
                             <td>
                                 <div class="action-btns">
-                                    <button class="btn btn-danger btn-sm" onclick="deleteChicken(${c.id})">
+                                    <button class="btn btn-edit btn-sm" onclick="openEditModal(${c.id})" title="Edit">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteChicken(${c.id})" title="Hapus">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>
@@ -843,16 +1345,11 @@
 
             colonyCount.textContent = `${chickens.length} koloni`;
             renderSummary();
-
-            form.reset();
-            typeSelect.value = 'kampung';
-            const todayStr = new Date().toISOString().split('T')[0];
-            birthDateInput.value = todayStr;
-            nameInput.focus();
+            renderFeedDetail();
         }
 
         // ============================================================
-        //  SUMMARY
+        //  RENDER — SUMMARY
         // ============================================================
         function renderSummary() {
             const totalChickens = chickens.reduce((sum, c) => sum + c.qty, 0);
@@ -914,10 +1411,162 @@
                 </div>
                 <div class="summary-item">
                     <span class="icon"><i class="fas fa-utensils"></i></span>
-                    <div class="number">${totalFeed.toLocaleString()} gr</div>
+                    <div class="number">${totalFeed.toLocaleString()}</div>
                     <div class="label">Total Pakan (gr/hari)</div>
                 </div>
             `;
+        }
+
+        // ============================================================
+        //  RENDER — KALKULASI PAKAN DETAIL & PROYEKSI
+        // ============================================================
+        function renderFeedDetail() {
+            const price = getFeedPrice();
+
+            // ---- Detail per koloni ----
+            if (chickens.length === 0) {
+                feedDetailBody.innerHTML = `
+                    <tr>
+                        <td colspan="10">
+                            <div class="empty-state" style="padding: 24px 12px;">
+                                <i class="fas fa-egg" style="font-size:36px;"></i>
+                                <p style="margin-top:6px;">Belum ada data koloni</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                feedProjectionGrid.innerHTML = `
+                    <div class="summary-item" style="grid-column: 1 / -1;">
+                        <span class="icon"><i class="fas fa-info-circle"></i></span>
+                        <div class="number" style="font-size:15px; font-weight:600;">Belum ada data</div>
+                        <div class="label">Tambahkan koloni untuk melihat kalkulasi pakan</div>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            let totalPerDay = 0;
+
+            chickens.forEach((c, idx) => {
+                const age = calculateAge(c.birthDate);
+                const type = chickenTypes.find(t => t.id === c.typeId) || chickenTypes[0];
+                const feedInfo = getFeedForAge(c.typeId, age.totalMonths);
+                const feedPerBird = feedInfo.feed;
+                const perDay = feedPerBird * c.qty;
+                const perWeek = perDay * 7;
+                const perMonth = perDay * 30;
+                const costPerMonth = (perMonth / 1000) * price;
+
+                totalPerDay += perDay;
+
+                html += `
+                    <tr>
+                        <td><strong>${idx + 1}</strong></td>
+                        <td><strong>${escapeHtml(c.name)}</strong></td>
+                        <td><span class="badge-type">${type.name}</span></td>
+                        <td><span class="badge-age">${age.totalMonths} bln</span></td>
+                        <td><span class="phase-badge phase-${feedInfo.phaseClass}">${feedInfo.phase}</span></td>
+                        <td>${feedPerBird} gr</td>
+                        <td><strong>${formatNumber(perDay)} gr</strong></td>
+                        <td>${formatNumber(perWeek)} gr</td>
+                        <td>${formatWeight(perMonth)}</td>
+                        <td style="color:#3e9d63; font-weight:700;">${formatRupiah(costPerMonth)}</td>
+                    </tr>
+                `;
+            });
+
+            feedDetailBody.innerHTML = html;
+
+            // ---- Proyeksi total ----
+            const perWeekTotal = totalPerDay * 7;
+            const perMonthTotal = totalPerDay * 30;
+            const perYearTotal = totalPerDay * 365;
+            const costPerMonthTotal = (perMonthTotal / 1000) * price;
+            const costPerYearTotal = (perYearTotal / 1000) * price;
+
+            feedProjectionGrid.innerHTML = `
+                <div class="summary-item highlight">
+                    <span class="icon"><i class="fas fa-sun"></i></span>
+                    <div class="number">${formatWeight(totalPerDay)}</div>
+                    <div class="label">Pakan / Hari</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-calendar-week"></i></span>
+                    <div class="number">${formatWeight(perWeekTotal)}</div>
+                    <div class="label">Pakan / Minggu</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                    <div class="number">${formatWeight(perMonthTotal)}</div>
+                    <div class="label">Pakan / Bulan (30 hr)</div>
+                </div>
+                <div class="summary-item">
+                    <span class="icon"><i class="fas fa-calendar"></i></span>
+                    <div class="number">${formatWeight(perYearTotal)}</div>
+                    <div class="label">Pakan / Tahun</div>
+                </div>
+                <div class="summary-item cost">
+                    <span class="icon"><i class="fas fa-money-bill-wave"></i></span>
+                    <div class="number">${formatRupiah(costPerMonthTotal)}</div>
+                    <div class="label">Biaya Pakan / Bulan</div>
+                </div>
+                <div class="summary-item cost">
+                    <span class="icon"><i class="fas fa-coins"></i></span>
+                    <div class="number">${formatRupiah(costPerYearTotal)}</div>
+                    <div class="label">Biaya Pakan / Tahun</div>
+                </div>
+            `;
+        }
+
+        // ============================================================
+        //  RENDER — REFERENSI JADWAL PAKAN
+        // ============================================================
+        function renderScheduleReference() {
+            let html = '';
+            chickenTypes.forEach(type => {
+                const schedule = type.feedSchedule;
+                const rows = [];
+                let prevAge = 0;
+
+                schedule.forEach(stage => {
+                    let ageLabel;
+                    if (stage.maxAge === Infinity) {
+                        ageLabel = `> ${prevAge} bulan`;
+                    } else if (prevAge === 0) {
+                        ageLabel = `0–${stage.maxAge} bulan`;
+                    } else {
+                        ageLabel = `${prevAge}–${stage.maxAge} bulan`;
+                    }
+                    rows.push({
+                        phase: stage.phase,
+                        phaseClass: stage.phaseClass,
+                        feed: stage.feed,
+                        ageLabel: ageLabel
+                    });
+                    prevAge = stage.maxAge;
+                });
+
+                rows.forEach((row, idx) => {
+                    html += `<tr>`;
+                    if (idx === 0) {
+                        html += `<td rowspan="${rows.length}"><span class="badge-type">${type.name}</span></td>`;
+                    }
+                    html += `
+                        <td>
+                            <span class="phase-badge phase-${row.phaseClass}">${row.phase}</span>
+                            <small style="color:#8b6f55; margin-left:6px;">${row.ageLabel}</small>
+                        </td>
+                        <td><span class="info-badge"><i class="fas fa-utensils"></i> ${row.feed} gr</span></td>
+                    `;
+                    if (idx === 0) {
+                        const layingText = type.startLaying !== null ? `${type.startLaying} bulan` : 'Tidak bertelur';
+                        html += `<td rowspan="${rows.length}">${layingText}</td>`;
+                    }
+                    html += `</tr>`;
+                });
+            });
+            scheduleReferenceBody.innerHTML = html;
         }
 
         // ============================================================
@@ -934,6 +1583,23 @@
             saveData();
             render();
             showToast(`✅ "${name.trim()}" berhasil ditambahkan!`, 'fa-check-circle');
+        }
+
+        function updateChicken(id, name, qty, birthDate, typeId) {
+            const index = chickens.findIndex(c => c.id === id);
+            if (index === -1) return false;
+
+            chickens[index] = {
+                ...chickens[index],
+                name: name.trim(),
+                qty: parseInt(qty, 10),
+                birthDate: birthDate,
+                typeId: typeId,
+            };
+            saveData();
+            render();
+            showToast(`✏️ "${name.trim()}" berhasil diperbarui!`, 'fa-pen');
+            return true;
         }
 
         function deleteChicken(id) {
@@ -993,6 +1659,14 @@
         // ============================================================
         //  EVENT LISTENERS
         // ============================================================
+        openModalBtn.addEventListener('click', openAddModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const name = nameInput.value.trim();
@@ -1014,17 +1688,36 @@
             if (birth > today) { showToast('⚠️ Tanggal lahir tidak boleh di masa depan!', 'fa-exclamation-triangle');
                 birthDateInput.focus(); return; }
 
-            addChicken(name, qty, birthDate, typeId);
+            if (editingId !== null) {
+                updateChicken(editingId, name, qty, birthDate, typeId);
+            } else {
+                addChicken(name, qty, birthDate, typeId);
+            }
+            closeModal();
         });
 
         clearAllBtn.addEventListener('click', clearAll);
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                form.reset();
-                nameInput.focus();
-                showToast('🧽 Form dibersihkan', 'fa-eraser');
+            if (e.key === 'Escape' && modalOverlay.classList.contains('show')) {
+                closeModal();
             }
+        });
+
+        // Harga pakan
+        feedPriceInput.addEventListener('input', () => {
+            saveFeedPrice();
+            renderFeedDetail();
+        });
+
+        // Toggle referensi jadwal
+        toggleScheduleBtn.addEventListener('click', () => {
+            const isHidden = scheduleReference.style.display === 'none';
+            scheduleReference.style.display = isHidden ? 'block' : 'none';
+            const icon = toggleScheduleBtn.querySelector('i');
+            const text = toggleScheduleBtn.querySelector('span');
+            icon.className = isHidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+            text.textContent = isHidden ? 'Sembunyikan Jadwal Pakan Referensi' : 'Lihat Jadwal Pakan Referensi';
         });
 
         // ============================================================
@@ -1032,6 +1725,7 @@
         // ============================================================
         (function init() {
             populateTypeSelect();
+            loadFeedPrice();
             const hasData = loadData();
 
             if (!hasData || chickens.length === 0) {
@@ -1066,9 +1760,9 @@
                 showToast('📂 Data berhasil dimuat dari penyimpanan lokal.', 'fa-database');
             }
 
-            const todayStr = new Date().toISOString().split('T')[0];
-            birthDateInput.value = todayStr;
+            birthDateInput.value = todayString();
             typeSelect.value = 'kampung';
+            renderScheduleReference();
             render();
         })();
     </script>
