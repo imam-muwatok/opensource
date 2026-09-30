@@ -429,6 +429,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
         .bep-section .card-title i {
             color: var(--green);
@@ -439,137 +440,223 @@
             color: var(--text-muted);
             margin-left: auto;
         }
-        .bep-grid {
+
+        /* Summary */
+        .bep-summary {
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            margin-bottom: 20px;
             display: grid;
-            grid-template-columns: 0.8fr 1.1fr 1.1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
             position: relative;
             z-index: 1;
         }
-        .bep-card {
+        .bep-summary-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-right: 16px;
+            border-right: 1px solid var(--border-color);
+        }
+        .bep-summary-item:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+        .bep-summary-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .bep-summary-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .bep-summary-value.total-chickens {
+            color: var(--purple);
+        }
+        .bep-summary-value.total-expense {
+            color: var(--accent);
+        }
+        .bep-summary-value.total-colonies {
+            color: var(--blue);
+        }
+        .bep-summary-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Per colony grid */
+        .bep-colony-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .bep-colony-card {
             background: var(--bg-primary);
-            padding: 20px 22px;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
+            padding: 16px 18px;
             position: relative;
             overflow: hidden;
             transition: var(--transition);
         }
-        .bep-card:hover {
-            transform: translateY(-3px);
+        .bep-colony-card:hover {
+            transform: translateY(-2px);
             border-color: rgba(255, 255, 255, 0.15);
         }
-        .bep-card::after {
+        .bep-colony-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
-            height: 100%;
-            border-radius: 0 4px 4px 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
         }
-        .bep-card.bep-chickens::after {
-            background: var(--purple);
-        }
-        .bep-card.bep-v1::after {
-            background: var(--blue);
-        }
-        .bep-card.bep-v2::after {
-            background: var(--accent);
-        }
-        .bep-card.bep-v1 {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05), transparent);
-        }
-        .bep-card.bep-v2 {
-            background: linear-gradient(135deg, rgba(245, 166, 35, 0.05), transparent);
-        }
-        .bep-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
+        .bep-colony-header {
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            flex-wrap: wrap;
         }
-        .bep-label i {
-            font-size: 14px;
-            opacity: 0.8;
+        .bep-colony-header i {
+            color: var(--accent);
+            font-size: 15px;
         }
-        .bep-label .version-tag {
+        .bep-colony-header .colony-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            flex: 1;
+        }
+        .bep-colony-header .chicken-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 30px;
+            background: rgba(155, 89, 182, 0.15);
+            color: var(--purple);
+            border: 1px solid rgba(155, 89, 182, 0.25);
+        }
+        .bep-colony-header .chicken-badge.no-count {
+            background: rgba(106, 127, 153, 0.15);
+            color: var(--text-muted);
+            border-color: rgba(106, 127, 153, 0.25);
+        }
+        .bep-colony-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .bep-mini-card {
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+        }
+        .bep-mini-card.bep-mini-v1 {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.08), transparent);
+            border-color: rgba(52, 152, 219, 0.2);
+        }
+        .bep-mini-card.bep-mini-v2 {
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.08), transparent);
+            border-color: rgba(245, 166, 35, 0.2);
+        }
+        .bep-mini-label {
             font-size: 10px;
             font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 30px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             color: var(--text-muted);
-        }
-        .bep-value {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
-        .bep-value .currency {
-            font-size: 16px;
-            font-weight: 600;
-            opacity: 0.7;
-            margin-right: 2px;
-        }
-        .bep-value .per-unit {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-left: 2px;
-        }
-        .bep-value.bep-chickens-value {
-            color: var(--purple);
-        }
-        .bep-value.bep-v1-value {
-            color: var(--blue);
-        }
-        .bep-value.bep-v2-value {
-            color: var(--accent);
-        }
-        .bep-sub {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 6px;
-        }
-        .bep-detail {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--border-color);
+            margin-bottom: 6px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             gap: 4px;
         }
-        .bep-detail .detail-row {
+        .bep-mini-card.bep-mini-v1 .bep-mini-label {
+            color: var(--blue);
+        }
+        .bep-mini-card.bep-mini-v2 .bep-mini-label {
+            color: var(--accent);
+        }
+        .bep-mini-value {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+            line-height: 1.15;
+        }
+        .bep-mini-card.bep-mini-v1 .bep-mini-value {
+            color: var(--blue);
+        }
+        .bep-mini-card.bep-mini-v2 .bep-mini-value {
+            color: var(--accent);
+        }
+        .bep-mini-value .currency {
+            font-size: 11px;
+            font-weight: 600;
+            opacity: 0.7;
+            margin-right: 1px;
+        }
+        .bep-mini-value .per-unit {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        .bep-mini-sub {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .bep-colony-detail {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+        }
+        .bep-colony-detail .row {
             display: flex;
             justify-content: space-between;
             gap: 8px;
         }
-        .bep-detail .detail-row .detail-label {
+        .bep-colony-detail .row .lbl {
             color: var(--text-muted);
         }
-        .bep-detail .detail-row .detail-value {
+        .bep-colony-detail .row .val {
             color: var(--text-secondary);
             font-weight: 600;
         }
-        .bep-empty {
+        .bep-colony-empty {
             grid-column: 1 / -1;
             text-align: center;
             padding: 24px;
             color: var(--text-muted);
             font-size: 13px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            border: 1px dashed var(--border-color);
         }
-        .bep-empty i {
+        .bep-colony-empty i {
             margin-right: 6px;
         }
 
@@ -1295,11 +1382,18 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .bep-grid {
+            .bep-summary {
                 grid-template-columns: 1fr 1fr;
             }
-            .bep-card.bep-chickens {
+            .bep-summary-item:nth-child(2) {
+                border-right: none;
+            }
+            .bep-summary-item:nth-child(3) {
                 grid-column: 1 / -1;
+                border-right: none;
+                padding-right: 0;
+                border-top: 1px solid var(--border-color);
+                padding-top: 12px;
             }
         }
         @media (max-width: 768px) {
@@ -1404,14 +1498,9 @@
             .modal .add-row .form-control.count-input {
                 flex: 1;
             }
-            .bep-grid {
-                grid-template-columns: 1fr;
-            }
-            .bep-card.bep-chickens {
-                grid-column: auto;
-            }
-            .bep-value {
-                font-size: 24px;
+            .bep-section .card-title .bep-info {
+                margin-left: 0;
+                width: 100%;
             }
         }
         @media (max-width: 420px) {
@@ -1436,6 +1525,22 @@
             .colony-chart-card .chart-wrapper canvas {
                 max-width: 140px;
                 max-height: 140px;
+            }
+            .bep-summary {
+                grid-template-columns: 1fr;
+            }
+            .bep-summary-item {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 10px;
+            }
+            .bep-summary-item:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            .bep-colony-body {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1507,12 +1612,15 @@
         <section class="bep-section">
             <div class="card">
                 <div class="card-title">
-                    <i class="fas fa-calculator"></i> Analisis Harga BEP per Ekor
+                    <i class="fas fa-calculator"></i> Analisis Harga BEP per Koloni
                     <span class="bep-info"><i class="fas fa-info-circle"></i> Minimal harga jual agar balik modal</span>
                 </div>
-                <div class="bep-grid" id="bepGrid">
-                    <!-- Rendered by JS -->
-                </div>
+
+                <!-- Summary -->
+                <div class="bep-summary" id="bepSummary"></div>
+
+                <!-- Per Colony Grid -->
+                <div class="bep-colony-grid" id="bepColonyGrid"></div>
             </div>
         </section>
 
@@ -1932,7 +2040,8 @@
         const colonyFilter = document.getElementById('colonyFilter');
         const colonyChartsContainer = document.getElementById('colonyChartsContainer');
         const colonyChartsGrid = document.getElementById('colonyChartsGrid');
-        const bepGrid = document.getElementById('bepGrid');
+        const bepSummaryEl = document.getElementById('bepSummary');
+        const bepColonyGridEl = document.getElementById('bepColonyGrid');
 
         // Modal expense
         const expenseModalOverlay = document.getElementById('expenseModalOverlay');
@@ -2370,107 +2479,137 @@
         }
 
         // ============================================================
-        //  RENDER BEP
+        //  RENDER BEP PER KOLONI
         // ============================================================
         function renderBEP() {
-            const totalAyam = colonyNames.reduce((sum, c) => sum + (Number(c.count) || 0), 0);
+            const totalAyamSemua = colonyNames.reduce((sum, c) => sum + (Number(c.count) || 0), 0);
+            const totalExpenseSemua = expenses.reduce((sum, e) => sum + e.amount, 0);
 
-            // Version 1: DOC + Pakan only
-            const docTotal = expenses
-                .filter(e => e.category === 'Bibit/DOC')
-                .reduce((sum, e) => sum + e.amount, 0);
-            const pakanTotal = expenses
-                .filter(e => e.category === 'Pakan')
-                .reduce((sum, e) => sum + e.amount, 0);
-            const version1Total = docTotal + pakanTotal;
-            const bep1 = totalAyam > 0 ? version1Total / totalAyam : 0;
-
-            // Version 2: All expenses
-            const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
-            const bep2 = totalAyam > 0 ? totalExpense / totalAyam : 0;
-
-            // Total chickens card
-            const chickensCard = `
-                <div class="bep-card bep-chickens">
-                    <div class="bep-label"><i class="fas fa-dove"></i> Total Ayam</div>
-                    <div class="bep-value bep-chickens-value">
-                        ${totalAyam.toLocaleString('id-ID')}
-                        <span class="per-unit">ekor</span>
-                    </div>
-                    <div class="bep-sub">Dari ${colonyNames.length} koloni terdaftar</div>
+            // ===== SUMMARY =====
+            bepSummaryEl.innerHTML = `
+                <div class="bep-summary-item">
+                    <span class="bep-summary-label"><i class="fas fa-dove"></i> Total Ayam</span>
+                    <span class="bep-summary-value total-chickens">${totalAyamSemua.toLocaleString('id-ID')} <span style="font-size:13px;font-weight:500;opacity:0.7;">ekor</span></span>
+                    <span class="bep-summary-sub">Dari ${colonyNames.length} koloni</span>
+                </div>
+                <div class="bep-summary-item">
+                    <span class="bep-summary-label"><i class="fas fa-wallet"></i> Total Pengeluaran</span>
+                    <span class="bep-summary-value total-expense">Rp ${formatCurrency(totalExpenseSemua)}</span>
+                    <span class="bep-summary-sub">${expenses.length} transaksi</span>
+                </div>
+                <div class="bep-summary-item">
+                    <span class="bep-summary-label"><i class="fas fa-users"></i> Koloni Aktif</span>
+                    <span class="bep-summary-value total-colonies">${colonyNames.length}</span>
+                    <span class="bep-summary-sub">${colonyNames.filter(c => c.count > 0).length} dengan jumlah ayam</span>
                 </div>
             `;
 
-            // Version 1 card
-            const v1Card = `
-                <div class="bep-card bep-v1">
-                    <div class="bep-label">
-                        <i class="fas fa-egg"></i> Versi 1
-                        <span class="version-tag">DOC + Pakan</span>
-                    </div>
-                    <div class="bep-value bep-v1-value">
-                        <span class="currency">Rp</span>${Math.round(bep1).toLocaleString('id-ID')}
-                        <span class="per-unit">/ekor</span>
-                    </div>
-                    <div class="bep-sub">Minimal harga jual untuk BEP (DOC + Pakan)</div>
-                    <div class="bep-detail">
-                        <div class="detail-row">
-                            <span class="detail-label">🐣 Bibit/DOC</span>
-                            <span class="detail-value">Rp ${formatCurrency(docTotal)}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">🌾 Pakan</span>
-                            <span class="detail-value">Rp ${formatCurrency(pakanTotal)}</span>
-                        </div>
-                        <div class="detail-row" style="border-top:1px solid var(--border-color);padding-top:4px;margin-top:2px;">
-                            <span class="detail-label"><b>Total</b></span>
-                            <span class="detail-value"><b>Rp ${formatCurrency(version1Total)}</b></span>
-                        </div>
-                    </div>
-                </div>
-            `;
+            // ===== PER COLONY BEP =====
+            // Get all colonies that have either expenses or chicken count > 0
+            const colonySet = new Set();
+            colonyNames.forEach(c => {
+                if (c.name) colonySet.add(c.name);
+            });
+            expenses.forEach(e => {
+                if (e.colony) colonySet.add(e.colony);
+            });
+            const allColonies = [...colonySet].sort((a, b) => a.localeCompare(b, 'id'));
 
-            // Version 2 card
-            const v2Card = `
-                <div class="bep-card bep-v2">
-                    <div class="bep-label">
-                        <i class="fas fa-coins"></i> Versi 2
-                        <span class="version-tag">Semua Pengeluaran</span>
-                    </div>
-                    <div class="bep-value bep-v2-value">
-                        <span class="currency">Rp</span>${Math.round(bep2).toLocaleString('id-ID')}
-                        <span class="per-unit">/ekor</span>
-                    </div>
-                    <div class="bep-sub">Minimal harga jual untuk BEP (semua pengeluaran)</div>
-                    <div class="bep-detail">
-                        <div class="detail-row">
-                            <span class="detail-label">Total semua pengeluaran</span>
-                            <span class="detail-value">Rp ${formatCurrency(totalExpense)}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Total ayam</span>
-                            <span class="detail-value">${totalAyam.toLocaleString('id-ID')} ekor</span>
-                        </div>
-                        <div class="detail-row" style="border-top:1px solid var(--border-color);padding-top:4px;margin-top:2px;">
-                            <span class="detail-label"><b>BEP per ekor</b></span>
-                            <span class="detail-value"><b>Rp ${Math.round(bep2).toLocaleString('id-ID')}</b></span>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            // If no chickens data, show empty state
-            if (totalAyam === 0) {
-                bepGrid.innerHTML = `
-                    <div class="bep-empty">
+            if (allColonies.length === 0) {
+                bepColonyGridEl.innerHTML = `
+                    <div class="bep-colony-empty">
                         <i class="fas fa-info-circle"></i>
-                        Belum ada data jumlah ayam. Tambahkan jumlah ayam di <b>Kelola Koloni</b> untuk melihat analisis BEP.
+                        Belum ada koloni. Tambahkan koloni di <b>Kelola Koloni</b>.
                     </div>
                 `;
                 return;
             }
 
-            bepGrid.innerHTML = chickensCard + v1Card + v2Card;
+            let gridHtml = '';
+            allColonies.forEach(colonyName => {
+                const colonyObj = findColony(colonyName);
+                const chickenCount = colonyObj ? (Number(colonyObj.count) || 0) : 0;
+
+                // Filter expenses for this colony
+                const colonyExpenses = expenses.filter(e => e.colony === colonyName);
+
+                // Version 1: DOC + Pakan only
+                const docTotal = colonyExpenses
+                    .filter(e => e.category === 'Bibit/DOC')
+                    .reduce((sum, e) => sum + e.amount, 0);
+                const pakanTotal = colonyExpenses
+                    .filter(e => e.category === 'Pakan')
+                    .reduce((sum, e) => sum + e.amount, 0);
+                const version1Total = docTotal + pakanTotal;
+                const bep1 = chickenCount > 0 ? version1Total / chickenCount : 0;
+
+                // Version 2: All expenses
+                const totalExpense = colonyExpenses.reduce((sum, e) => sum + e.amount, 0);
+                const bep2 = chickenCount > 0 ? totalExpense / chickenCount : 0;
+
+                const countBadgeClass = chickenCount > 0 ? 'chicken-badge' : 'chicken-badge no-count';
+                const countText = chickenCount > 0 ? `🐔 ${chickenCount} ekor` : '🐔 Belum diisi';
+
+                let bep1ValueHtml, bep2ValueHtml;
+                if (chickenCount > 0) {
+                    bep1ValueHtml = `<span class="currency">Rp</span>${Math.round(bep1).toLocaleString('id-ID')}<span class="per-unit"> /ekor</span>`;
+                    bep2ValueHtml = `<span class="currency">Rp</span>${Math.round(bep2).toLocaleString('id-ID')}<span class="per-unit"> /ekor</span>`;
+                } else {
+                    bep1ValueHtml = `<span style="font-size:14px;opacity:0.6;">—</span>`;
+                    bep2ValueHtml = `<span style="font-size:14px;opacity:0.6;">—</span>`;
+                }
+
+                // Detail rows
+                const detailHtml = chickenCount > 0 ? `
+                    <div class="bep-colony-detail">
+                        <div class="row">
+                            <span class="lbl">🐣 Bibit/DOC</span>
+                            <span class="val">Rp ${formatCurrency(docTotal)}</span>
+                        </div>
+                        <div class="row">
+                            <span class="lbl">🌾 Pakan</span>
+                            <span class="val">Rp ${formatCurrency(pakanTotal)}</span>
+                        </div>
+                        <div class="row">
+                            <span class="lbl">📋 Semua pengeluaran</span>
+                            <span class="val">Rp ${formatCurrency(totalExpense)}</span>
+                        </div>
+                    </div>
+                ` : `
+                    <div class="bep-colony-detail">
+                        <div class="row">
+                            <span class="lbl" style="color:var(--accent);">⚠️ Isi jumlah ayam di Kelola Koloni</span>
+                        </div>
+                    </div>
+                `;
+
+                gridHtml += `
+                    <div class="bep-colony-card">
+                        <div class="bep-colony-header">
+                            <i class="fas fa-users"></i>
+                            <span class="colony-name">${colonyName}</span>
+                            <span class="${countBadgeClass}">${countText}</span>
+                        </div>
+                        <div class="bep-colony-body">
+                            <div class="bep-mini-card bep-mini-v1">
+                                <div class="bep-mini-label">
+                                    <i class="fas fa-egg"></i> V1 · DOC + Pakan
+                                </div>
+                                <div class="bep-mini-value">${bep1ValueHtml}</div>
+                            </div>
+                            <div class="bep-mini-card bep-mini-v2">
+                                <div class="bep-mini-label">
+                                    <i class="fas fa-coins"></i> V2 · Semua
+                                </div>
+                                <div class="bep-mini-value">${bep2ValueHtml}</div>
+                            </div>
+                        </div>
+                        ${detailHtml}
+                    </div>
+                `;
+            });
+
+            bepColonyGridEl.innerHTML = gridHtml;
         }
 
         function renderList() {
@@ -2945,7 +3084,7 @@
                 expenses: expenses,
                 colonyNames: colonyNames,
                 categoryNames: categoryNames,
-                version: '1.2',
+                version: '1.3',
                 exportedAt: new Date().toISOString()
             };
             const json = JSON.stringify(data, null, 2);
